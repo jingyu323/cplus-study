@@ -1,14 +1,16 @@
 {
-  "configurations": [
-    {
-      "compilerPath": "D:\\mingw\\bin\\g++.exe",
-      "cppStandard": "c++17",
-      "includePath": [
-        "${workspaceFolder}/**"
-      ],
-      "intelliSenseMode": "windows-gcc-x64",
-      "name": "Win32"
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
 }
