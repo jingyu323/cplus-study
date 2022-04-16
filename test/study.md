@@ -14,5 +14,15 @@
  3.引用必须在创建时被初始化
  int&  r = i;
  ### exception
- 1.standarg lib 
+ * 1.runtime_error
+ * 2.range_error
+ * 3.excetion common error
+ * 4.overflow_error :runtime error compute overflow
+ * 5.logic_error : programe logic error
+ * 6.invalid_argument: invalid arg
+
+ ### C++ 的main函数
+ 没有添加return 是因为编译器自动会添加
+ ### 创建一个类
+ 关键字就是 struct 或者class，区别点是默访问权限不同
  
