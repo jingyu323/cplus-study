@@ -16,6 +16,7 @@ int main ()
  
    // 输出数组中每个元素的值                     
    for ( int j = 0; j < 10; j++ )
+   
    {
       std::cout  << setw( 7 )<< j << setw( 13 ) << n[ j ] << std::endl;
    }

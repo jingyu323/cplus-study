@@ -5,9 +5,9 @@ int main()
 {
   char name[50];
  
-   cout << "Çë ";
+   cout << "ce:";
    cin >> name;
-   cout << "Äã " << name << endl;
+   cout << "out " << name << endl;
     
     return 0;
 }

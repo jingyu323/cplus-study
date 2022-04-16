@@ -3,3 +3,6 @@ test/.vscode/c_cpp_properties.json
 test/.vscode/test_str
 test/test_class
 test/.vscode/c_cpp_properties.json
+test/test_input
+test/test_getline
+test/test_vextor
