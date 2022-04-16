@@ -20,6 +20,13 @@ int main ()
    {
       std::cout  << setw( 7 )<< j << setw( 13 ) << n[ j ] << std::endl;
    }
- 
+ int i; double d;
+ d=i=3.5;
+ cout<< d <<"  "<< i<< endl;
+
+ i=d=3.5;
+  cout<< d <<"  "<< i<< endl;
+
+  cout << sizeof(d) << "  "<< sizeof(i) << endl;
    return 0;
 }

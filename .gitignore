@@ -6,3 +6,4 @@ test/.vscode/c_cpp_properties.json
 test/test_input
 test/test_getline
 test/test_vextor
+test/test_try_catch
