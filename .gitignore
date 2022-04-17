@@ -9,3 +9,4 @@ test/test_vextor
 test/test_try_catch
 test/test_student_main
 test/test_main_class
+test/*.exe
