@@ -3,7 +3,7 @@ using namespace std;
 
 class  Sales_data
 {
-friend Sales_data add(const Sa);
+friend Sales_data add(const Sales_data&,const Sales_data&);
 public:
      Sales_data(string isbn);
     
