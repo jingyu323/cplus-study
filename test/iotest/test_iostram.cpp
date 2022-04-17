@@ -1,11 +1,13 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-void process_input(  ){
+string process_input(  ){
     cout << "process_input " << endl;
      char name[50];
     cin >> name;
     cout << "name" << name << endl;
+    return name;
 }
 
 int main(int argc, char const *argv[])
@@ -14,9 +16,22 @@ int main(int argc, char const *argv[])
     cin.clear();
     cout << "old_status " << old_status << endl;
 
-    process_input( );
+    string input_name =  process_input( );
 
     cin.setstate(old_status);
+
+    cout<<"hi!"<<endl;//输出hi和换行，然后刷新缓冲区
+    cout<<"hi!"<<flush;//输出hi，然后刷新缓冲区，不附加任何额外字符
+    cout<<"hi!"<<ends;//输出hi和空字符，然后刷新缓冲区
+    ofstream out;
+    out.open("file1",ofstream::out | ofstream::app);
+    if(!out.fail()){
+
+        out << input_name ;
+
+    } 
+
+
      
     return 0;
 }
