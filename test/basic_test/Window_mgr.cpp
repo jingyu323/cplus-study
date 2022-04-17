@@ -7,5 +7,5 @@ class Window_mrg{
 
     private:
      
-    std::vector<Screen> screens{Screen(24,80,'')}
+    // std::vector<Screen> screens{Screen(24,80,'')}
 }
