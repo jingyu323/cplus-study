@@ -4,6 +4,7 @@ using namespace std;
 class  Sales_data
 {
 friend Sales_data add(const Sales_data&,const Sales_data&);
+friend iostream &read(iostream& ,Sales_data&);
 public:
      Sales_data(string isbn);
     
