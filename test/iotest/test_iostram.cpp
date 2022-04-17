@@ -1,7 +1,23 @@
 #include <iostream>
-#include <fstream>
+#include <fstream> 
 using namespace std;
 
+
+/**
+ * @brief 
+ * 
+ * 常用的值如下：
+　　ios::app：　　　以追加的方式打开文件
+　　ios::ate：　　　文件打开后定位到文件尾，ios:app就包含有此属性
+　　ios::binary：　以二进制方式打开文件，缺省的方式是文本方式。两种方式的区别见前文
+　　ios::in：　　　 文件以输入方式打开(文件数据输入到内存)
+　　ios::out：　　　文件以输出方式打开(内存数据输出到文件)
+　　ios::nocreate： 不建立文件，所以文件不存在时打开失败
+　　ios::noreplace：不覆盖文件，所以打开文件时如果文件存在失败
+　　ios::trunc：　　如果文件存在，把文件长度设为0 
+ * 
+ * @return string 
+ */
 string process_input(  ){
     cout << "process_input " << endl;
      char name[50];
@@ -30,8 +46,21 @@ int main(int argc, char const *argv[])
         out << input_name ;
 
     } 
+    out.close();
 
+ 
 
+ 
+fstream   reader;
+reader.open("file1",ofstream::in );
+ cout << "readfile start"  << endl;
+
+char buf[1021]={0};
+while(reader.getline(buf,sizeof(buf)))
+{
+    std::cout<<buf<<std::endl;
+} 
+reader.close();
      
     return 0;
 }
