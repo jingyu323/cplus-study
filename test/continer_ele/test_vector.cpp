@@ -25,6 +25,7 @@
 
 #include <vector> 
 #include <list> 
+#include <map> 
 #include <forward_list> 
 using namespace std;
 
@@ -62,6 +63,41 @@ int main(int argc, char const *argv[])
         /* code */
     }
     
+    map<string, int> m2;
+
+    m2.insert({ "abc", 1 });
+    m2.insert(make_pair("ww",9));
+
+    m2.insert(pair<string, int>( "ghi", 3));
+  map<string,int> m3 = {
+    {"string",1}, {"sec",2}, {"trd",3}
+    };
+ 
+    map<string,string> m4 = {
+    {"first","second"}, {"third","fourth"},
+    {"fifth","sixth"}, {"begin","end"} };
+
+
+//打印 m1,m2
+	auto it12 = m2.begin();
+	cout << "m2:" << endl;
+	while (it12 != m2.end())
+	{
+		cout << it12->first << " " << it12->second << endl;
+		it12++;
+	} 
+
+    cout <<"m2:" << endl;
+	auto it2 = m2.begin();
+	while (it2 != m2.end())
+	{
+		cout << it2->first << " " << it2->second << endl;
+		it2++;
+	}
+    string s("C++ Primary");
+    s.insert(s.size(),"  4Eidtion");
+
+    cout << s << endl;
 
     return 0;
 }
