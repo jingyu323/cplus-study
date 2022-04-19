@@ -15,3 +15,4 @@ test/iotest/binaty_write_file
 test/iotest/user.dat
 test/iotest/binary_read_file
 test/iotest/test_string_stream_write
+test/**.exe
