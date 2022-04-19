@@ -24,6 +24,7 @@
 #include <string>
 
 #include <vector> 
+#include <stack> 
 #include <list> 
 #include <map> 
 #include <forward_list> 
@@ -98,6 +99,21 @@ int main(int argc, char const *argv[])
     s.insert(s.size(),"  4Eidtion");
 
     cout << s << endl;
+
+    stack<int> intStack;
+    for(size_t ix=0; ix != 10;++ix){
+        intStack.push(ix);
+    }
+
+    while (!intStack.empty())
+    {
+        int value = intStack.top();  //  查看栈顶元素但是不弹出
+
+         intStack.pop(); // 弹出栈顶元素部返回zhi
+    }
+    
+
+
 
     return 0;
 }
