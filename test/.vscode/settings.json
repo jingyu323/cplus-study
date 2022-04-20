@@ -48,6 +48,10 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "map": "cpp",
+        "forward_list": "cpp",
+        "optional": "cpp",
+        "sstream": "cpp"
     }
 }
