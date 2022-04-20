@@ -18,6 +18,15 @@ int main(int argc, char const *argv[])
         cout<<*x<<" ";
     }
 
+
+    for (size_t i = 0; i < lst.size(); i++)
+    {
+         
+
+        //  cout<<lst[i]<<" ";
+    }
+    
+
   // 不能用for 下标取值，还需要研究一下 输入之后怎么输出的问题
     
 
