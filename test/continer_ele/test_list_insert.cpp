@@ -18,7 +18,7 @@ int main(int argc, char const *argv[])
         cout<<*x<<" ";
     }
 
-  
+  // 不能用for 下标取值，还需要研究一下 输入之后怎么输出的问题
     
 
     return 0;
