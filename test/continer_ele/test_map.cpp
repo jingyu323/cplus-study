@@ -61,7 +61,10 @@ map<int,string > ::iterator l_it;;
    
    auto ret2 = mapPerson.insert({4,"ttt4"});
 
-   cout<<ret2.second<<endl;
+   cout<< "ret:"<<ret2.second<<endl;
+
+      cout<<ret2.first->first <<endl;
+      cout<<ret2.first->second <<endl;
 
    // 如果元素不存在 返回值成功1也就是true，如果元素已经存在，则返回值为0 也就是false
 
