@@ -54,6 +54,17 @@ map<int,string > ::iterator l_it;;
              
    else cout<<"wo find 112"<<endl; 
 
+   auto ret = mapPerson.insert({4,"ttt4"});
+
+   cout<<ret.second<<endl;
+
+   
+   auto ret2 = mapPerson.insert({4,"ttt4"});
+
+   cout<<ret2.second<<endl;
+
+   // 如果元素不存在 返回值成功1也就是true，如果元素已经存在，则返回值为0 也就是false
+
 
 
     return 0;
