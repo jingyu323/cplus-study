@@ -12,6 +12,10 @@ using namespace std;
 
 
 
+//用迭代器的方式
+void updateMap(map<int, string>& map, int key, string value) {
+    map.find(key)->second = value;
+}
 int main(int argc, char const *argv[])
 {
     
@@ -66,9 +70,18 @@ map<int,string > ::iterator l_it;;
       cout<<ret2.first->first <<endl;
       cout<<ret2.first->second <<endl;
 
+ 
+ updateMap(mapPerson, 4, "rrrr");
+
+    mapPerson.find(4);
+
+    cout<< "after update :"<<  mapPerson.find(4)->second <<endl;
+
    // 如果元素不存在 返回值成功1也就是true，如果元素已经存在，则返回值为0 也就是false
 
 
 
     return 0;
 }
+
+
