@@ -52,6 +52,7 @@
         "map": "cpp",
         "forward_list": "cpp",
         "optional": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "set": "cpp"
     }
 }
