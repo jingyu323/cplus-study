@@ -1,3 +1,13 @@
+/**
+ * @file test_initializer_list.cpp
+ * @author your name (you@domain.com)
+ * @brief  模板方法初始化模板
+ * @version 0.1
+ * @date 2022-04-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include<initializer_list>
 #include<iostream>
 using namespace std;
