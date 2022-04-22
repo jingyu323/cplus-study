@@ -1,5 +1,6 @@
 #include "QueryResult.h"
 #include "TextQuery.h"
+#include "TextQuery.cpp"
 
 #include "make_pluarl.h"
 #include <fstream>
