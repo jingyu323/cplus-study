@@ -10,7 +10,7 @@ class Pair
  public:
     T1 key;  //关键字
     T2 value;  //值
-    Pair(T1 k,T2 v):key(k),value(v){};
+    Pair(T1 k,T2 v):key(k),value(v){};  // 代表初始化变量
 
  bool operator < (const Pair<T1,T2> &p) const;
 
