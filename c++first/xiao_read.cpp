@@ -15,8 +15,10 @@ int solution(int n, int pages[7],int length){
     int result;
     // TODO:
             while(n>0){
+
+                  int length1=sizeof(pages)/sizeof(pages[0]);
  
-            printf("%d", length);//i=9
+            printf("%d ---", length1);//i=9
             for(int i=0;i< length ;i++){
                 result = i+1;
                 n = n - pages[i];
