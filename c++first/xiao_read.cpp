@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+// 如果实在想用sizeof(array)/sizeof(array[0])算长度，请不要将数组作为参数，而是在main函数中算好length，再将传入函数中
 
 int solution(int n, int pages[7],int length){
     int result;
