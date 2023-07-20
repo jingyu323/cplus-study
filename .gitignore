@@ -9,10 +9,10 @@ test/test_vextor
 test/test_try_catch
 test/test_student_main
 test/test_main_class
-test/*.exe
+*.exe
 test/iotest/test_iostram
 test/iotest/binaty_write_file
 test/iotest/user.dat
 test/iotest/binary_read_file
 test/iotest/test_string_stream_write
-test/**.exe
+**.exe

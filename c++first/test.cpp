@@ -3,7 +3,19 @@
 #include <vector>
 #include <string>
 using namespace std;
- 
+ void test_while(){
+    int a = 100;
+
+    while (a >0)
+    {
+        /* code */
+        a = a -10;
+
+        cout << a << " ";
+    }
+    cout << endl;
+    
+}
 
 int main()
 {
@@ -15,5 +27,8 @@ int main()
     }
     cout << endl;
 
+  test_while();
     return 0;
 }
+
+
