@@ -177,21 +177,18 @@ void printListInfo(LinkList L){
 
 LinkList List_headInsert(LinkList &L){
     LNode *s;
-
     int x ;
 
     L = (LinkList)malloc (sizeof(LNode)); // 创建头节点
     L->next = NULL;
-    scanf("d%",&x);
-
+    scanf("%d",&x);
     while (x!=9999)
     {
-
         s= (LNode*) malloc(sizeof(LNode));
         s->data = x;
         s->next=L->next;
         L->next = s;  // 头节点指向新创建节点，也就是将新节点插入链表
-         scanf("d%",&x); 
+        scanf("%d",&x);
     }
     return L;
 
@@ -200,11 +197,8 @@ LinkList List_headInsert(LinkList &L){
 int main(int argc, char const *argv[])
 {
     LinkList L;
-
     InitList(L);
-
     List_headInsert(L);
-
     printListInfo(L);
     return 0;
 }
