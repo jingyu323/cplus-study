@@ -19,3 +19,48 @@ bool InitDlinklist(DLinkList &L){
 
 }
 
+bool InsertNextDNode(Dnode *p,Dnode *s){
+    s->next = p->next; //先修改插入节点的指向
+    if(p->next != NULL){ // 修改的是后驱节点的前向指针
+         p->next->prior = s;
+    }
+    s->prior = p;  // 修改插入元素的前向指针
+    p->next = s;  // 修改p的后驱指针
+
+}
+
+// 删除节点的后继节点
+bool DeleteDNode(Dnode *p){
+    if(p == NULL){ return false ;
+    }
+    Dnode *q  = p->next; //  z找到后继节点
+
+    if(q == NULL){
+            return false;
+    }
+
+    p->next = q->next;
+
+    if(q->next != NULL){
+        q->next->prior = p;
+    }
+
+    free(q);
+    return true;
+}
+
+
+
+int main(int argc, char const *argv[])
+{
+    
+    DLinkList L;
+
+    InitDlinklist(L);
+
+
+
+    return 0;
+}
+
+
