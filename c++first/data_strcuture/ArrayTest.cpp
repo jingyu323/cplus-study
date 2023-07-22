@@ -50,6 +50,25 @@ bool ListInsert(SqList &L,int i ,int e){
 }
 
 
+bool ListDelete(SqList &L,int i ,int e){
+    if(i<1 || i >L.length  ){
+
+        return false;
+
+    }
+    e = L.data[i-1] ;
+    for(int j = i ; j<L.length;j--){
+        // 不能使用j+1 是因为这个不是所有元素后移，数组长度有限这个是覆盖
+        L.data[j-1] =L.data[j];
+        
+    }
+    
+    L.length--;
+    return true;
+
+}
+
+
 void   printList(SqList L){
         for (int i = 0; i < L.length; i++)
     {
