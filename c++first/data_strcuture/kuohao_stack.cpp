@@ -22,7 +22,7 @@ bool Push(SqStatck &S, char x){
 
 }
 
-bool Pod(SqStatck s, char &x){
+bool Pop(SqStatck s, char &x){
 
 }
 
@@ -33,14 +33,43 @@ bool bracketCheck(char str[], int length){
 
     for (int  i = 0; i < length; i++)
     {
-        if(str[i] ==   "(" || str[i] == "{"  || str[i] == "[" ){
-            Push(S,str[i])
+        if(str[i] == '('  || str[i] == '{'  || str[i] == '[' ){
+            Push(S,str[i])；
+        }else{
+            if(StackEmpty(S)){
+                return false;
+            }
+
+            char topElem;
+
+            Pop(S,topElem);
+
+            if (str[i] == ')' && topElem != '('){
+                return false;
+            } 
+
+             if (str[i] == ']' && topElem != '['){
+                return false;
+            } 
+
+            if (str[i] == '}' && topElem != '{'){
+                return false;
+            } 
+
 
         }
         
 
     }
+    return StackEmpty(S);
+
+}
+
+int main(int argc, char const *argv[])
+{
     
 
 
+    
+    return 0;
 }
