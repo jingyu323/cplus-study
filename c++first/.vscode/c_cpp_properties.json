@@ -10,7 +10,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:\\msys64\\usr\\bin\\g++.exe"
+            "compilerPath": "D:/mingw/bin/gcc.exe"
         }
     ],
     "version": 4
