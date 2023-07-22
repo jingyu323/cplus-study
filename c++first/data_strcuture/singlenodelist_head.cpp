@@ -24,8 +24,43 @@ bool InitList(LinkList &L){
 }
 
 bool Empty(LinkList L){
-    return  L == NULL;
+    return  L->next == NULL;
 }
+
+
+// P 节点之后插入元素
+bool InsertNextNode(LNode *p,int e ){
+    if(p == NULL){
+        return false;
+    }
+
+     LNode *s = (LNode * ) malloc(sizeof(LNode));
+
+    if(s == NULL){
+        return false;
+    }
+
+    s->data = e;
+    s->next=p->next;
+    p->next=s;
+    return  true;
+
+}
+
+// 再 p之前插入 节点s
+bool InsertPreNode(LNode *p,LNode *s){
+     if(s == NULL ||  p == NULL){
+        return false;
+    }
+      s->next=p->next;
+
+      int tmp = p->data;
+
+      p->data = s->data;
+      s->data =tmp;
+    return true;
+}
+
 
 bool ListInsert(LinkList &L,int i , int e ){
     if(i< 1){
@@ -49,6 +84,32 @@ bool ListInsert(LinkList &L,int i , int e ){
     p->next=s;
 
     return true;
+}
+
+bool ListDelete(LinkList &L,int i , int e){
+
+    if(i< 1){
+        return false;
+    }
+    LNode *p ;
+    int j = 0;
+    p = L;
+
+    while (p != NULL && j < i-1   )
+    {
+        p= p->next;
+        j++;
+    }
+    
+    if(p == NULL) return false;
+
+    if(p->next == NULL) return false;
+
+    LNode *s = p->next;
+    e= s->data;
+    p->next = s->next;
+    free(s);
+    return  true;
 }
 
 

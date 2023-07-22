@@ -36,7 +36,7 @@ bool ListInsert(LinkList &L,int i , int e ){
     }
 
     LNode *p ;
-    int j = 0;
+    int j = 1;
     p = L;
 
     while (p != NULL && j < i-1   )
