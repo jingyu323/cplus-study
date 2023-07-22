@@ -33,19 +33,17 @@ bool InsertNextNode(LNode *p,int e ){
     if(p == NULL){
         return false;
     }
-
      LNode *s = (LNode * ) malloc(sizeof(LNode));
-
     if(s == NULL){
         return false;
     }
-
     s->data = e;
     s->next=p->next;
     p->next=s;
     return  true;
-
 }
+
+
 
 // 再 p之前插入 节点s
 bool InsertPreNode(LNode *p,LNode *s){
@@ -112,28 +110,101 @@ bool ListDelete(LinkList &L,int i , int e){
     return  true;
 }
 
+bool DeleteNode(LNode *p){
+    if(p == NULL) return false;
+    LNode *q = p->next;
+    q->data= p->next->data;
+    p->next = q->next;
+    free(q);
+    return true;
+
+}
+
+LNode* GetEle(LinkList L, int i){
+    if(i< 0){
+        return NULL;
+    }
+
+    LNode *p;
+    int j=0;
+    p= L; // 头节点
+
+    while (p!= NULL && j<i)
+    {
+        p = p->next;
+        j++;
+    }
+
+    return p;
+    
+
+} 
+
+
+// 按值查找
+LNode * LocalteEle(LinkList L,int e){
+    LNode *p = L->next;
+
+    while (p != NULL && p->data != e)
+    {
+        /* code */
+        p= p->next;
+    }
+    
+    return p;
+
+}
+
+
+
+void printListInfo(LinkList L){
+    if(L == NULL || L->next == NULL ){
+        printf("L is null....");
+        return ;
+    }
+
+     LNode *s = L->next;
+     int i=0;
+
+    while (s !=NULL)
+    {
+        printf("data[%d]=%d\n",i,s->data);
+        s = s->next;
+        i++;
+    }
+}
+
+
+LinkList List_headInsert(LinkList &L){
+    LNode *s;
+
+    int x ;
+
+    L = (LinkList)malloc (sizeof(LNode)); // 创建头节点
+    L->next = NULL;
+    scanf("d%",&x);
+
+    while (x!=9999)
+    {
+
+        s= (LNode*) malloc(sizeof(LNode));
+        s->data = x;
+        s->next=L->next;
+        L->next = s;  // 头节点指向新创建节点，也就是将新节点插入链表
+         scanf("d%",&x); 
+    }
+    return L;
+
+}
 
 int main(int argc, char const *argv[])
 {
-    
-     LinkList L = (LinkList  ) malloc(sizeof(LNode));
+    LinkList L;
 
-     L->next  = NULL;
+    InitList(L);
 
-    LNode *first,*sec,*third=L;
+    List_headInsert(L);
 
-
-    first->data = 1;
-    first->next=sec;
-    sec->data = 2;
-    third->data=3;
-    sec->next = third;
-
-
-    int e = 3 ;
-     bool  res = ListInsert(L,  2 ,   e );
-     printf(" ddis : s%",&res);
-
-
+    printListInfo(L);
     return 0;
 }
