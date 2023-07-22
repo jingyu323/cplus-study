@@ -97,19 +97,12 @@ void printAllNodeBackRead(DLinkList L){
 int main(int argc, char const *argv[])
 {
     
-    DLinkList L;
-
+    DLinkList L; // 定义头节点
     bool inires =   InitDlinklist(L);
-
     Dnode *s =  (Dnode  *) malloc(sizeof(Dnode));
     s->data = 9;
-
     bool res = InsertNextDNode(L,s);
-
     printAllNodeBackRead(L);
-
-
-
     return 0;
 }
 
