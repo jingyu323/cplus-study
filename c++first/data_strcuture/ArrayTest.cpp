@@ -76,6 +76,23 @@ int GetEle(SqList L,int i ){
     return L.data[i];
 }
 
+int locateEle(SqList L , int e){
+
+    for (int i = 0; i < L.length; i++)
+    {
+        /* code */
+        if(L.data[i] == e){
+            return i +1;
+
+        }
+
+    }
+
+    return 0;
+    
+
+}
+
 
 void   printList(SqList L){
         for (int i = 0; i < L.length; i++)
