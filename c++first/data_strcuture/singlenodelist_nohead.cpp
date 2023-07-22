@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// list 不带头节点的定义
 typedef struct LNode
 {
     int data;
@@ -9,6 +10,16 @@ typedef struct LNode
     /* data */
 } LNode, *LinkList;
 
+
+bool InitList(LinkList &L){
+    L = NULL;
+    return true;
+
+}
+
+bool Empty(LinkList L){
+    return  L == NULL;
+}
 
 bool ListInsert(LinkList &L,int i , int e ){
     if(i< 1){
