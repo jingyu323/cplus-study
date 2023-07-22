@@ -2,6 +2,10 @@
 
 #define MaxSize 10 
 
+/**
+ *  元素再物理上连续
+ * 
+ */
 typedef struct 
 {
     int data[MaxSize];
@@ -66,6 +70,10 @@ bool ListDelete(SqList &L,int i ,int e){
     L.length--;
     return true;
 
+}
+
+int GetEle(SqList L,int i ){
+    return L.data[i];
 }
 
 
