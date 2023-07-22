@@ -28,6 +28,27 @@ bool pushEle(SqList &L,int e){
 
 }
 
+bool ListInsert(SqList &L,int i ,int e){
+    if(i<1 || i >L.length + 1){
+
+        return false;
+
+    }
+    if(L.length > MaxSize){
+        return false;
+    }
+
+    for(int j = L.length ; j>= i;j--){
+        // 不能使用j+1 是因为这个不是所有元素后移，数组长度有限这个是覆盖
+        L.data[j]=L.data[j-1];
+        
+    }
+    L.data[i-1] = e;
+    L.length++;
+    return true;
+
+}
+
 
 void   printList(SqList L){
         for (int i = 0; i < L.length; i++)
@@ -57,6 +78,12 @@ int main(int argc, char const *argv[])
     pushEle(L,13);
 
     printList( L);
+
+
+    ListInsert(L,9,15);
+
+        printList( L);
+
     return 0;
 }
 
