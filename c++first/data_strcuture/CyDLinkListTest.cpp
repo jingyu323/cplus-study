@@ -8,6 +8,8 @@ typedef struct  LNode
 } LNode, *LinkList;
 
 
+// 双向循环链表
+
 bool InitDlinklist(LinkList &L){
     L = (LNode  *) malloc(sizeof(LNode));
     if(L == NULL){
