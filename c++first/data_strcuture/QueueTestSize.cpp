@@ -7,44 +7,46 @@ typedef struct  Queue
     int data[MaxSize];    // 指针传递真是值，不是副本
           
     int  front,rear;
+    int size ;
 } SeqQueue ;
 
 bool InitSeqQueue(SeqQueue &Q){
     Q.front=Q.rear=0;
+    Q.size = 0;
     return true;
 }
 
 bool EmptySeqQueue(SeqQueue &Q){
-    return Q.front==Q.rear;
+    return  Q.size == 0;
 }
 
 
 // 入队
 bool EnSeqQueue(SeqQueue &Q, int e){
-    if((Q.rear +1)% MaxSize == Q.front){
-
-        printf(" queue is full");
-        return false;
+    if(MaxSize == Q.size){
+            return false;
     }
 
     Q.data[Q.rear] = e;
     Q.rear =(Q.rear +1)%MaxSize;
+     Q.size =  Q.size +1;
     return true;
 }
 
 
 // 出队
 bool DeSeqQueue(SeqQueue &Q, int &e){
-    if(Q.rear == Q.front){
+    if(Q.size == 0){
             return false;
     }
     e=Q.data[Q.front];
     Q.front =(Q.front +1)%MaxSize;
+    Q.size =  Q.size -1;
     return true;
 }
 
 bool GetSeqQueueHead(SeqQueue Q, int &e){
-    if(Q.rear == Q.front){
+    if(Q.size==0){
             return false;
     }
     e=Q.data[Q.front];
@@ -53,8 +55,10 @@ bool GetSeqQueueHead(SeqQueue Q, int &e){
 
 // 获取队列中的元素个数
 int getQueueSize(SeqQueue Q){
-    return (Q.rear + MaxSize - Q.front)%MaxSize;
+    return  Q.size;
 }
+
+
 
 void printQueueEle(SeqQueue Q){
 
