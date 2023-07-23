@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include <stdlib.h>
-
  
 #define InitSize 10
 // 静态链表
@@ -28,34 +27,6 @@ bool Empty(SeqList L ){
     return false;
 }
 
- 
-
-
-// 删除节点的后继节点
-bool DeleteDNode(LNode *p){
-    if(p == NULL){ return false ;
-    }
-    LNode *q  = p->next; //  z找到后继节点
-
-    if(q == NULL){
-            return false;
-    }
-    p->next = q->next;
-
-    free(q);
-    return true;
-}
-
-void DestroyList(LinkList &L){
-    while (L->next != NULL)
-    {
-       DeleteDNode(L);
-    }
-    free(L);
-    L= NULL;
-    
-}
-
 // 前向遍历
 void printAllNodePreRead(SeqList L){
  
@@ -67,12 +38,7 @@ void printAllNodePreRead(SeqList L){
 int main(int argc, char const *argv[])
 {
     
-    LinkList L; // 定义头节点
-    bool inires =   InitDlinklist(L);
-    LNode *s =  (LNode  *) malloc(sizeof(LNode));
-    s->data = 9;
-    bool res = InsertNextDNode(L,s);
-    printAllNodeBackRead(L);
+    
     return 0;
 }
 
