@@ -33,10 +33,11 @@ bool InitDlinklist(SLinkList L){
 
 }
 
+// 获取空闲元素的下标
 int Malloc_SSL(SLinkList space){
     int i = space[0].cur;  // 当前数组第一个元素的cur存的值，即第一个备用空闲的下标
     if(space[0].cur){ 
-        space[0].cur = space[i].cur; //拿出备用链表的一个分量来使用，将其作为下个分量
+        space[0].cur = space[i].cur; //拿出备用链表的一个分量来使用，将其作为下个分量 ，修改space[0].cur 的值为i的指向值
     }
     return i;
 } 
