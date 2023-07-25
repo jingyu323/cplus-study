@@ -75,7 +75,7 @@ ElementType DeleteQ(Queue* q) {
         q->rear = NULL;
     }
     else {
-        q->front = q->front->next;
+        q->front = q->front->next; // 对应的也是修改头指针的指向 
     }
     item = temp->data;
     free(temp);
