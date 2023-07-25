@@ -8,186 +8,197 @@
 #define MAXSIZE 6 //存储数据元素的最大个数
 #define ERROR -99 //ElementType的特殊值，标志错误
  
-
-
-typedef struct  Queue1
+ 
+typedef struct Deque
 {
-    int data[MaxSize];    // 指针传递真是值，不是副本
-          
-    int  front,rear;
-} SeqQueue ;
-
-bool InitSeqQueue(SeqQueue &Q){
-    Q.front=Q.rear=0;
-    return true;
-}
+    int *data;
+    int front;
+    int tail;
+    int size;
+    int capacity;
+} *Deque;
 
 
-
-typedef struct {
-    ElementType data[MAXSIZE];
-    int front; //记录队列头元素位置
-    int rear; //记录队列尾元素位置
-    int size; //存储数据元素的个数
-}Queue;
-
-
-bool EmptySeqQueue(SeqQueue &Q){
-    return Q.front==Q.rear;
-}
-
-
-// 入队
-bool EnSeqQueue(SeqQueue &Q, int e){
-    if((Q.rear +1)% MaxSize == Q.front){
-
-        printf(" queue is full");
-        return false;
-    }
-
-    Q.data[Q.rear] = e;
-    Q.rear =(Q.rear +1)%MaxSize;
-    return true;
-}
-
-
-// 出队
-bool DeSeqQueue(SeqQueue &Q, int &e){
-    if(Q.rear == Q.front){
-            return false;
-    }
-    e=Q.data[Q.front];
-    Q.front =(Q.front +1)%MaxSize;
-    return true;
-}
-
-bool GetSeqQueueHead(SeqQueue Q, int &e){
-    if(Q.rear == Q.front){
-            return false;
-    }
-    e=Q.data[Q.front];
-    return true;
-}
-
-// 获取队列中的元素个数
-int getQueueSize(SeqQueue Q){
-    return (Q.rear + MaxSize - Q.front)%MaxSize;
-}
-
-void printQueueEle(SeqQueue Q){
-
-        for (int i = 0; i < getQueueSize(Q) ; i++)
+// 初始化
+Deque initiation(int capacity)
+{
+    Deque queue = (Deque) malloc(sizeof (struct Deque));
+    queue->data = (int *) malloc(sizeof (int) * capacity);
+    queue->capacity = capacity;
+    queue->front = 0;
+    queue->tail = 0;
+    queue->size = 0;
+    if (queue == NULL || queue->data == NULL)
     {
-          printf("data[%d]=%d\n",i,Q.data[i]);
+        perror("Deque initiation failed");
+        exit(-1);
     }
-    
-
+    return queue;
 }
 
 
 
+// 获取容量
+int getCapacity(Deque q)
+{
+    return q->capacity;
+}
+// 获取元素个数
+int getSize(Deque q)
+{
+    return q->size;
+}
 
 
-Queue* CreateQueue() {
-    Queue* q = (Queue*)malloc(sizeof(Queue));
-    if (!q) {
-        printf("空间不足\n");
-        return NULL;
+// 判断队列是否空
+int isEmpty(Deque q)
+{
+    return q->size == 0;
+}
+
+// 扩容/缩容
+void resize(int newCapacity, Deque q)
+{
+    int *newData = (int *) malloc(newCapacity * sizeof (int));
+    for (int i = 0; i < q->size; i++)
+    {
+        newData[i] = q->data[(q->front + i) % q->capacity];
     }
-    q->front = -1;
-    q->rear = -1;
-    q->size = 0;
-    return q;
+    free(q->data);
+    q->data = newData;
+    q->capacity = newCapacity;
+    q->front = 0;
+    q->tail = q->size;
+} 
+
+// 队尾入队
+void addLast(int e, Deque q)
+{
+    if (q->size == q->capacity)
+    {
+        resize(2 * q->capacity, q);
+    }
+    q->data[q->tail] = e;
+    q->tail = (q->tail + 1) % q->capacity;
+    q->size++;
 } 
 
 
-
-int IsFullQ(Queue* q) {
-    return (q->size == MAXSIZE);
-}
-
-
-
-void AddQ(Queue* q, ElementType item) {
-    if (IsFullQ(q)) {
-        printf("队列已满\n");
-        return;
+// 队首入队
+void addFirst(int e, Deque q) {
+    if (q->size == q->capacity) {
+        resize(2 * q->capacity, q);
     }
-    q->rear++;
-    q->rear %= MAXSIZE;
+    q->front = q->front == 0? q->capacity - 1: q->front - 1;
+    q->data[q->front] = e;
     q->size++;
-    q->data[q->rear] = item;
 }
-
-int IsEmptyQ(Queue* q) {
-    return (q->size == 0);
-}
-
-
-ElementType DeleteQ(Queue* q) {
-    if (IsEmptyQ(q)) {
-        printf("空队列\n");
-        return ERROR;
+// 队首出队
+int removeFirst(Deque q)
+{
+    if (isEmpty(q))
+    {
+        perror("removeFirst failed, queue is empty now");
+        return -1;
     }
-    q->front++;
-    q->front %= MAXSIZE; //0 1 2 3 4 5
+    int ret = q->data[q->front];
+    q->front = (q->front + 1) % q->capacity;
     q->size--;
+    if (q->size == q->capacity / 4 && q->capacity / 2 != 0)
+    {
+        resize(q->capacity / 2, q);
+    }
+    return ret;
+} 
+// 队尾出队
+int removeLast(Deque q) {
+    if (isEmpty(q))
+    {
+        perror("removeLast failed, queue is empty now");
+        return -1;
+    }
+    q->tail = q->tail == 0? q->capacity - 1: q->tail - 1;
+    int ret = q->data[q->tail];
+    q->size--;
+    if (q->size == q->capacity / 4 && q->capacity / 2 != 0)
+    {
+        resize(q->capacity / 2, q);
+    }
+    return ret;
+}
+// 获取队首
+int getFront(Deque q)
+{
+    if (isEmpty(q))
+    {
+        perror("GetFront failed, queue is empty now");
+        return -1;
+    }
     return q->data[q->front];
 }
-
-
-void PrintQueue(Queue* q) {
-    if (IsEmptyQ(q)) {
-        printf("空队列\n");
-        return;
-    }
-    printf("打印队列数据元素：\n");
-    int index = q->front;
-    int i;
-    for (i = 0; i < q->size; i++) {
-        index++;
-        index %= MAXSIZE;
-        printf("%d ", q->data[index]);
-    }
-    printf("\n");
-} 
-
-
-int main(int argc, const char * argv[]) {
-     SeqQueue q1;
-
-    InitSeqQueue(q1);
-
-    for (int i = 0; i < MaxSize+2; i++)
+// 获取队尾
+int getLast( Deque q) {
+    if (isEmpty(q))
     {
-        EnSeqQueue(q1,i+3);
+        perror("GetLast failed, queue is empty now");
+        return -1;
     }
-    
-    printQueueEle( q1);
-
-
-    
-    Queue* q = CreateQueue();
-    
-    AddQ(q, 0);
-    AddQ(q, 1);
-    AddQ(q, 2);
-    AddQ(q, 3);
-    AddQ(q, 4);
-    AddQ(q, 5);
-    PrintQueue(q);
-    
-    DeleteQ(q);
-    DeleteQ(q);
-    DeleteQ(q);
-    PrintQueue(q);
-    
-    AddQ(q, 6);
-    AddQ(q, 7);
-    AddQ(q, 8);
-    PrintQueue(q);
+    int index = q->tail == 0? q->capacity - 1: q->tail - 1;
+    return q->data[index];
+}
+// 打印队列
+void toString(Deque q)
+{
+    printf("Deque: size = %d, capacity = %d\n", q->size, q->capacity);
+    printf("front [");
+    for (int i = 0; i < q->size; i++)
+    {
+        printf("%d", q->data[(q->front + i) % q->capacity]);
+        if (i != q->size - 1)
+        {
+            printf(", ");
+        }
+    }
+    printf("] tail\n");
+}
+// 销毁队列
+void destroy(Deque q) {
+    free(q->data);
+    q->data = NULL;
+    if (q->data == NULL)
+    {
+        free(q);
+        q = NULL;
+        if (q == NULL)
+        {
+            printf("The Deque has successfully been destroyed.\n");
+        }
+        else
+        {
+            perror("Deque destroy failed");
+            exit(-1);
+        }
+    }
+    else
+    {
+        perror("Deque destroy failed");
+        exit(-1);
+    }
+}
  
-    return 0;
+int main() {
+    Deque q = initiation(10);
+    for (int i = 0; i < 16; i ++) {
+        if (i % 2 == 0) {
+            addLast(i, q);
+        } else addFirst(i, q);
+        toString(q);
+    }
+    for (int i = 0; !isEmpty(q); i ++) {
+        if (i % 2 == 0) {
+            removeFirst(q);
+        } else removeLast(q);
+        toString(q);
+    }
+    destroy(q);
 } 
-
-
