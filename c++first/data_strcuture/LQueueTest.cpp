@@ -51,7 +51,7 @@ void AddQ(Queue* q, ElementType item) {
         q->rear = qNode;
     }
     else {
-        q->rear->next = qNode;
+        q->rear->next = qNode; // 在尾部插入修改尾指针指向
         q->rear = qNode;
     }
 
@@ -104,7 +104,7 @@ int main(int argc, const char * argv[]) {
     
     AddQ(q, 1);
     PrintQueue(q);
-    
+        AddQ(q, 2);
     DeleteQ(q);
     PrintQueue(q);
     
