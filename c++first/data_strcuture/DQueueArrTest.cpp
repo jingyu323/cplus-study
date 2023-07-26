@@ -44,7 +44,7 @@ int getSize(Deque q)
 
 
 // 判断队列是否空
-int isEmpty(Deque q)
+bool isEmpty(Deque q)
 {
     if(q == NULL){
 
@@ -69,20 +69,85 @@ bool isFull(Deque q)
 }
 
 
+//返回队头元素
+int GetHead(Deque q) {
+	if (q == NULL) {
+		printf("队列不存在\n");
+		return -1;//假设队列中存储非负整数，返回-1表示错误
+	}
+	if (isEmpty(q)) {
+		printf("队列为空，不存在队头元素\n");
+		return -1;
+	}
+	return q->data[q->front];
+} 
 
+//返回队尾元素
+int GetTail(Deque q) {
+	if (q == NULL) {
+		printf("队列不存在\n");
+		return -1;//假设队列中存储非负整数，返回-1表示错误
+	}
+	if (isEmpty(q)) {
+		printf("队列为空，不存在队尾元素\n");
+		return -1;
+	}
+	return q->data[q->tail];
+} 
+
+
+
+//获得从队头入队的下标
+int GetHeadIndex(Deque q, int size) {
+	if (isEmpty(q)) {
+		q->tail = 0;//如果从对头入队的是第一个元素，则需要将队头队尾指针都设为0
+		return 0;
+	}
+	if (q->front - 1 < 0) {
+		return (q->front - 1) + size;
+	}
+	else {
+		return q->front - 1;
+	}
+} 
 
  
 // 队尾入队
 void addLast(int e, Deque q)
 {
-    if (q->size == q->capacity)
-    {
-        resize(2 * q->capacity, q);
-    }
-    q->data[q->tail] = e;
-    q->tail = (q->tail + 1) % q->capacity;
+    
+
+    if (q == NULL) {
+		printf("队列不存在\n");
+		return;
+	}
+	if (isFull(q)) {
+		printf("队列已满，无法入队\n");
+		return;
+	}
+
+    q->front = GetHeadIndex(q, MaxSize);
+
     q->size++;
+    q->data[q->front] = e;
+
+
 } 
+
+//获得从队头入队的下标
+int GetHeadIndex(Deque q, int size) {
+	if (isEmpty(q)) {
+		q->tail = 0;//如果从对头入队的是第一个元素，则需要将队头队尾指针都设为0
+		return 0;
+	}
+	if (q->front - 1 < 0) {
+		return (q->front - 1) + size;
+	}
+	else {
+		return q->front - 1;
+	}
+} 
+
 
 
 // 队首入队
