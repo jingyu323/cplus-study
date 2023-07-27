@@ -134,7 +134,7 @@ Status StrDelete(SString* S, int pos, int len) {
     (*S).length-= len;
     return 0;
 }
-
+// 先删除 再增加
 Status Replace(SString *S, SString T, SString V) {
     int pos = Index(*S, T, 1);
     if (!pos) return ERROR;
