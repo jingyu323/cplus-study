@@ -155,6 +155,8 @@ Status StrInsert(SString* S, int pos, SString T) {
     return OK;
 }
 
+
+// 申请一段内存把 字符串放进去
 /*堆串插入*/
 int StrInsert(HString* s, int pos, HString* t) {
 //在串s中下标为pos的字符之前插入串t
@@ -175,6 +177,19 @@ int StrInsert(HString* s, int pos, HString* t) {
 	free(s->ch);
 	s->ch = temp;								//temp赋给串s
 	return TRUE;
+} 
+
+/*堆串输出*/
+void Display(HString* s) {
+	int i;
+	if (s->length == 0)
+		printf("空串！\n");
+	else {
+		for (i = 0; i < s->length; i++) {
+			printf("%c", s->ch[i]);
+		}
+		printf("\n");
+	}
 } 
 
 
