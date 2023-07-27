@@ -8,6 +8,7 @@
 #define TRUE        0
 #define FAUSE       1
 #define OVERFLOW    -2
+#define FALSE       1
 
 typedef int  Status ;
 
@@ -26,15 +27,39 @@ typedef struct
     int length;
 } HString;
 
-HString S1;
+ 
 int StrLength(SString S) {
     return S.length;
 }// StrLength
 
- void InitHString(){
-    S1.ch = (char *) malloc(MaxLength * sizeof(char));
-    S1.length = 0;
- }
+void StrInit(HString* s) {
+	s->ch = NULL;
+	s->length = 0;
+}
+
+/*堆串赋值*/
+int StrAssign(HString* s, char* tval) {
+//将字符串常量tval的值赋给堆串s
+	int len = 0, i = 0;
+	if (s->ch != NULL)
+		free(s->ch);
+	while (tval[i] != '\0')
+		i++;
+	len = i;
+	if (len) {
+		s->ch = (char*)malloc(len);				//申请空间
+		if (s->ch == NULL)
+			return FALSE;
+		for (i = 0; i < len; i++)				//将字符串常量tval的值赋给堆串s
+			s->ch[i] = tval[i];
+	}
+	else
+		s->ch = NULL;
+	s->length = len;
+	return TRUE;
+} 
+
+
 
  int SubString(SString *Sub, SString S, int pos, int len) {
     if (pos < 1 || pos > S.length || len < 0 || len > S.length - pos + 1) return ERROR;
@@ -130,8 +155,46 @@ Status StrInsert(SString* S, int pos, SString T) {
     return OK;
 }
 
+/*堆串插入*/
+int StrInsert(HString* s, int pos, HString* t) {
+//在串s中下标为pos的字符之前插入串t
+	int i;
+	char* temp;
+	if (pos < 0 || pos > s->length || s->length == 0)	//插入位置不合法
+		return FALSE;
+	temp = (char*)malloc(s->length + t->length);
+	if (temp == NULL)
+		return FALSE;
+	for (i = 0; i < pos; i++)
+		temp[i] = s->ch[i];						//串s前半段插入temp
+	for (i = 0; i < t->length; i++)
+		temp[i + pos] = t->ch[i];				//串t插入temp
+	for (i = pos; i < s->length; i++)
+		temp[i + t->length] = s->ch[i];			//串s后半段插入temp
+	s->length += t->length;
+	free(s->ch);
+	s->ch = temp;								//temp赋给串s
+	return TRUE;
+} 
 
 
+// 启用临时区域，把位置之前的元素放进去位置n之后的元素放进去 就合成一个新的字符数组
+/*堆串删除*/
+int StrDelete(HString* s, int pos, int n) {
+	int i;
+	char* temp;
+	if (pos < 0 || pos>s->length - n)				//删除位置不合法
+		return FALSE;
+	temp = (char*)malloc(s->length - n);
+	for (i = 0; i < pos; i++)
+		temp[i] = s->ch[i];
+	for (i = pos + n; i < s->length; i++)
+		temp[i - n] = s->ch[i];
+	s->length -= n;
+	free(s->ch);
+	s->ch = temp;
+	return TRUE;
+} 
 int StrEmpty(SString S) {
     if (S.length) return FAUSE;
     else return TRUE;
