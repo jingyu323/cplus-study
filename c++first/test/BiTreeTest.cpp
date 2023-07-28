@@ -107,7 +107,7 @@ int main(int argc, char const *argv[])
 
   MidOrder(T);
 
-    printf("\n");
+  printf("\n");
 
   BackOrder(T);
 
