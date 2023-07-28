@@ -34,18 +34,18 @@ void PreOrder(BiTree t){
 
 void MidOrder(BiTree t){
     if(t != NULL){
-        PreOrder(t->lchild);
+        MidOrder(t->lchild);
         visit(t);
         
-        PreOrder(t->rchild);
+        MidOrder(t->rchild);
     }
 }
 
 
 void BackOrder(BiTree t){
     if(t != NULL){
-        PreOrder(t->lchild);
-        PreOrder(t->rchild);
+        BackOrder(t->lchild);
+        BackOrder(t->rchild);
          visit(t);
     }
 }
@@ -64,12 +64,42 @@ int main(int argc, char const *argv[])
    lft->rchild=NULL;
    T->lchild = lft;
 
+
+   
+   BiTree lft1 = (BiTree) malloc(sizeof(BiTNode));
+   lft1->data=4;
+   lft1->lchild=NULL;
+   lft1->rchild=NULL;
+
+   BiTree lftr = (BiTree) malloc(sizeof(BiTNode));
+   lftr->data=5;
+   lftr->lchild=NULL;
+   lftr->rchild=NULL;
+
+   lft->lchild= lft1;
+   lft->rchild=lftr;
+
    
    BiTree right = (BiTree) malloc(sizeof(BiTNode));
    right->data=3;
-      right->lchild=NULL;
+   right->lchild=NULL;
    right->rchild=NULL;
    T->rchild = right;
+
+
+  BiTree right1 = (BiTree) malloc(sizeof(BiTNode));
+   right1->data=6;
+   right1->lchild=NULL;
+   right1->rchild=NULL;
+
+   BiTree rightr = (BiTree) malloc(sizeof(BiTNode));
+   rightr->data=7;
+   rightr->lchild=NULL;
+   rightr->rchild=NULL;
+
+   right->lchild= right1;
+   right->rchild=rightr;
+
 
   PreOrder(T);
 
