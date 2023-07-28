@@ -18,39 +18,12 @@ typedef struct
     char ch[MaxLength];
     int length;
 } SString,*String;
-
-
-
 typedef struct 
 {
     char *ch;
     int length;
 } HString;
 
-<<<<<<< HEAD
-HString S1;
-
- void InitHString(){
-    S1.ch = (char *) malloc(MaxLength * sizeof(char));
-    S1.length = 0;
- }
-
-
-bool StrAssign(SString  *S, char* chars) {
-    int len; char* c;
-    for (len = 0, c = chars; *c; len++, c++) {
-        (*S).ch[len + 1] = *c;
-    }
-    (*S).ch[0] = len;
-    return true;
-}// StrAssign
-
-
-int Index(SString s,SString T){
-    
-return 0;
-=======
- 
 int StrLength(SString S) {
     return S.length;
 }// StrLength
@@ -58,7 +31,6 @@ int StrLength(SString S) {
 void StrInit(HString* s) {
 	s->ch = NULL;
 	s->length = 0;
->>>>>>> d5c3afebaa18760bd7ef2bf01ef767b0ed8ab242
 }
 
 /*堆串赋值*/
@@ -125,9 +97,9 @@ int StrAssign(SString* S, char* chars) {
         // 指针的0位置是整个字符串，所以调整一下，让指针直接增加一位
         S->ch[len] = *c;
          printf("add index is %d \n", index);
-    index ++;
+        index ++;
         //   printf(" %s \n",c);
-        //   printf(" %s \n",S);
+          printf(" %s \n",S);
         c++;        
     }
     S->length= len;
@@ -158,51 +130,7 @@ Status StrDelete(SString* S, int pos, int len) {
     (*S).length-= len;
     return 0;
 }
-// 先删除 再增加
-Status Replace(SString *S, SString T, SString V) {
-    int pos = Index(*S, T, 1);
-    if (!pos) return ERROR;
-    StrDelete(S, pos, T.length);
-    StrInsert(S, pos, V);
-    return OK;
-}// Replace
 
-Status StrInsert(SString* S, int pos, SString T) {
-    if ((*S).length + T.length> MAXSTRLEN) exit(OVERFLOW);
-    SString tmp;
-    for (int i = 1; i <= (*S).length - pos + 1; i++) tmp.ch[i] = (*S).ch[pos + i - 1];
-    tmp.ch[0] = (*S).ch[0] - pos + 1;
-    for (int i = 1; i <= T.length; i++) 
-        (*S).ch[pos + i - 1] = T.ch[i];
-    for (int i = 1; i <= tmp.length; i++) (*S).ch[pos + T.length + i - 1] = tmp.ch[i];
-    (*S).length = (*S).length + T.length;
-    return OK;
-}
-
-
-int Index_KMP(SString S, SString T, int pos) {
-    int i = pos, j = 1;
-    int next[MAXSTRLEN + 1];
-    get_nextval(T, next);
-    while (i <= S.length && j <= T.length) {
-        if (j == 0 || S.ch[i] == T.ch[j]) { ++i; ++j; }
-        else j = next[j];
-    }
-    if ((j > T.length)) return (i - T.length);
-}// Index_KMP
-
-void get_nextval(SString T, int *nextval) {
-    * nextval = (long int)malloc(MAXSTRLEN * sizeof(int));
-    int i = 1; nextval[1] = 0; int j = 0;
-    while (i < T.length) {
-        if (j == 0 || T.ch[i] == T.ch[j]) {
-            ++i; ++j;
-            if (T.ch[i] != T.ch[j]) nextval[i] = j;
-            else nextval[i] = nextval[j];
-        }
-        else j = nextval[j];
-    }
-}// 
 
 
 // 申请一段内存把 字符串放进去
@@ -227,6 +155,59 @@ int StrInsert(HString* s, int pos, HString* t) {
 	s->ch = temp;								//temp赋给串s
 	return TRUE;
 } 
+
+
+Status StrInsert(SString* S, int pos, SString T) {
+    if ((*S).length + T.length> MAXSTRLEN) exit(OVERFLOW);
+    SString tmp;
+    for (int i = 1; i <= (*S).length - pos + 1; i++) tmp.ch[i] = (*S).ch[pos + i - 1];
+    tmp.ch[0] = (*S).ch[0] - pos + 1;
+    for (int i = 1; i <= T.length; i++) 
+        (*S).ch[pos + i - 1] = T.ch[i];
+    for (int i = 1; i <= tmp.length; i++) (*S).ch[pos + T.length + i - 1] = tmp.ch[i];
+    (*S).length = (*S).length + T.length;
+    return OK;
+}
+
+// 先删除 再增加
+Status Replace(SString *S, SString T, SString V) {
+    int pos = Index(*S, T, 1);
+    if (!pos) return ERROR;
+    StrDelete(S, pos, T.length);
+    StrInsert(S, pos, V);
+    return OK;
+}// Replace
+
+
+void get_nextval(SString T, int *nextval) {
+    * nextval = (long int)malloc(MAXSTRLEN * sizeof(int));
+    int i = 1; nextval[1] = 0; int j = 0;
+    while (i < T.length) {
+        if (j == 0 || T.ch[i] == T.ch[j]) {
+            ++i; ++j;
+            if (T.ch[i] != T.ch[j]) nextval[i] = j;
+            else nextval[i] = nextval[j];
+        }
+        else j = nextval[j];
+    }
+}// 
+
+int Index_KMP(SString S, SString T, int pos) {
+    int i = pos, j = 1;
+    int next[MAXSTRLEN + 1];
+    get_nextval(T, next);
+    while (i <= S.length && j <= T.length) {
+        if (j == 0 || S.ch[i] == T.ch[j]) { ++i; ++j; }
+        else j = next[j];
+    }
+    if ((j > T.length)) 
+    return (i - T.length);
+
+    return 0;
+}// Index_KMP
+
+
+
 
 /*堆串输出*/
 void Display(HString* s) {
@@ -266,26 +247,15 @@ int StrEmpty(SString S) {
 
 int main(int argc, char const *argv[])
 {
-    
-<<<<<<< HEAD
-String sss;  
 
-char ss = "wewewe";
-
-StrAssign(sss,&ss);
-
- 
- printf("%s",sss);
-=======
 SString sss;
  
 char* ss = "abcdefghijk"; // char 类型的字符擦
 
 StrAssign(&sss,ss);
 
-printf("%s \n",sss);
+printf("SSS =  %s \n",sss);
 printf("ss len is :%d \n",sss.length);
->>>>>>> d5c3afebaa18760bd7ef2bf01ef767b0ed8ab242
 
 
 SString copyStr;
@@ -296,6 +266,5 @@ StrCopy( &copyStr,sss);
 printf("copy str test ,copyStr is : %s \n",copyStr);
 printf("copy str test ,copyStr len is : %d \n",copyStr.length);
  
-     
-    return 0;
+ return 0;
 }
