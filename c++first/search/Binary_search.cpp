@@ -34,6 +34,6 @@ int Binary_search(SSTable L , int key){
     
 
 
-    return 0;
+    return -1;
 
 }
