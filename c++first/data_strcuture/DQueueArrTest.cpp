@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #define MaxSize 10
 
+// 队列是一种先进先出特性的线性表
 
  // 双端队列的数组实现
 typedef struct Deque

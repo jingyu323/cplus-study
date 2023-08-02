@@ -261,6 +261,5 @@ StrCopy( &copyStr,sss);
 printf("copy str test ,copyStr is : %s \n",copyStr);
 printf("copy str test ,copyStr len is : %d \n",copyStr.length);
  
-     
-    return 0;
+return 0;
 }
