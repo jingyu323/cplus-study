@@ -153,13 +153,26 @@ int GetHeadIndex(Deque q, int size) {
 
 // 队首入队
 void addFirst(int e, Deque q) {
-    if (q->size == q->capacity) {
-        resize(2 * q->capacity, q);
+    if (q->size == q->size) {
+        resize(2 * q->size, q);
     }
-    q->front = q->front == 0? q->capacity - 1: q->front - 1;
+    q->front = q->front == 0? q->size - 1: q->front - 1;
     q->data[q->front] = e;
     q->size++;
 }
+
+void resize(int newCapacity, Deque q)
+{
+    int *newData = (int *) malloc(newCapacity * sizeof (int));
+    for (int i = 0; i < q->size; i++)
+    {
+        newData[i] = q->data[(q->front + i) % q->size];
+    }
+    free(q->data);
+    q->size = newCapacity;
+    q->front = 0;
+    q->tail = q->size;
+} 
 // 队首出队
 int removeFirst(Deque q)
 {
@@ -169,11 +182,11 @@ int removeFirst(Deque q)
         return -1;
     }
     int ret = q->data[q->front];
-    q->front = (q->front + 1) % q->capacity;
+    q->front = (q->front + 1) % q->size;
     q->size--;
-    if (q->size == q->capacity / 4 && q->capacity / 2 != 0)
+    if (q->size == q->size / 4 && q->size / 2 != 0)
     {
-        resize(q->capacity / 2, q);
+        resize(q->size / 2, q);
     }
     return ret;
 } 
@@ -184,12 +197,12 @@ int removeLast(Deque q) {
         perror("removeLast failed, queue is empty now");
         return -1;
     }
-    q->tail = q->tail == 0? q->capacity - 1: q->tail - 1;
+    q->tail = q->tail == 0? q->size - 1: q->tail - 1;
     int ret = q->data[q->tail];
     q->size--;
-    if (q->size == q->capacity / 4 && q->capacity / 2 != 0)
+    if (q->size == q->size / 4 && q->size / 2 != 0)
     {
-        resize(q->capacity / 2, q);
+        resize(q->size / 2, q);
     }
     return ret;
 }
@@ -210,17 +223,17 @@ int getLast( Deque q) {
         perror("GetLast failed, queue is empty now");
         return -1;
     }
-    int index = q->tail == 0? q->capacity - 1: q->tail - 1;
+    int index = q->tail == 0? q->size - 1: q->tail - 1;
     return q->data[index];
 }
 // 打印队列
 void toString(Deque q)
 {
-    printf("Deque: size = %d, capacity = %d\n", q->size, q->capacity);
+    printf("Deque: size = %d, capacity = %d\n", q->size, q->size);
     printf("front [");
     for (int i = 0; i < q->size; i++)
     {
-        printf("%d", q->data[(q->front + i) % q->capacity]);
+        printf("%d", q->data[(q->front + i) % q->size]);
         if (i != q->size - 1)
         {
             printf(", ");
