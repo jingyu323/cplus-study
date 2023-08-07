@@ -6,7 +6,7 @@
 void InsertSort(int A[],int n){
     int i,j,temp;
 
-    for (  i = 1; i < n; i++)
+    for (  i = 1; i < n; i++)  // 需要从1开始
     {
        if(A[i] < A[i-1]){
           temp = A[i];
