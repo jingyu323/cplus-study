@@ -47,6 +47,13 @@ int main(int argc, char const *argv[])
     Student stu2(23,'34',name);
     stu2.display();
 
+    int a=10;
+   	int &b=a;
+	a=a*a;
+	std::cout<<a<<b<<std::endl;
+	b=b/5;
+	std::cout<<a<<b<<std::endl;
+
 
 
     return 0;
