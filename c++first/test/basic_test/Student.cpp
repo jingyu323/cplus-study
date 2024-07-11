@@ -42,7 +42,8 @@ int main(int argc, char const *argv[])
 
 
 
-    char name[20]={'r','1','2','3'};
+    // char name[20]={'r','1','2','3'};
+    char name[20]="woshixiaogou";
     Student stu2(23,'34',name);
     stu2.display();
 
