@@ -32,6 +32,14 @@ public:
 		std::cout<<"name:"<<name<<std::endl;
 		std::cout<<"sex:"<<sex<<std::endl; 
 	}
+
+    void swap(int &a, int &b)  //传入的参数为两个数的引用，这样就能通过改变引用值来改变实参的值。
+{
+	int temp;
+	temp=a;
+	a=b;
+    b=temp;
+    }
 }; 
 
 int main(int argc, char const *argv[])
@@ -53,6 +61,11 @@ int main(int argc, char const *argv[])
 	std::cout<<a<<b<<std::endl;
 	b=b/5;
 	std::cout<<a<<b<<std::endl;
+
+
+    int i=3 , j=5;
+    stu2.swap(i , j);
+    std::cout << "i=" << i << "j=" << j << std::endl;
 
 
 
