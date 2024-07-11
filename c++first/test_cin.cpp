@@ -10,5 +10,9 @@ int main()
     }
 
     std::cout<< "Sum is:"<< sum << std::endl;
+
+    unsigned u=10, u2 = 42;
+    std::cout << u2 -u << std::endl;
+
     return 0;
 }

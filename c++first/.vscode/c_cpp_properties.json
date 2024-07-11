@@ -10,7 +10,7 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:/mingw/bin/gcc.exe"
+            "compilerPath": "D:/MinGw/mingw64/bin/g++.exe"
         }
     ],
     "version": 4
