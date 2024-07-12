@@ -95,9 +95,50 @@ C++中struct和class的唯一区别在于默认的访问权限不同。
 
 ###  array
 
+### forward_list
+
+ [C++](https://c.biancheng.net/cplus/) 11 新添加的一类容器，其底层实现和 list 容器一样，采用的也是链表结构，只不过 forward_list 使用的是单链表，而 list 使用的是双向链表
+
+
+
+
+
 ###   list
 
 又称双向链表容器，即该容器的底层是以双向链表的形式实现的。这意味着，list 容器中的元素可以分散存储在内存空间里，而不是必须存储在一整块连续的内存空间中。
+
+splice() 成员方法的作用对象是其它 list 容器，其功能是将其它 list 容器中的元素添加到当前 list 容器中指定位置处。
+
+| 语法格式                                                     | 功能                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| void splice (iterator position, list& x);                    | position 为迭代器，用于指明插入位置；x 为另一个 list 容器。 此格式的 splice() 方法的功能是，将 x 容器中存储的所有元素全部移动当前 list 容器中 position 指明的位置处。 |
+| void splice (iterator position, list& x, iterator i);        | position 为迭代器，用于指明插入位置；x 为另一个 list 容器；i 也是一个迭代器，用于指向 x 容器中某个元素。 此格式的 splice() 方法的功能是将 x 容器中 i 指向的元素移动到当前容器中 position 指明的位置处。 |
+| void splice (iterator position, list& x, iterator first, iterator last); | position 为迭代器，用于指明插入位置；x 为另一个 list 容器；first 和 last 都是迭代器，[fist,last) 用于指定 x 容器中的某个区域。 此格式的 splice() 方法的功能是将 x 容器 [first, last) 范围内所有的元素移动到当前容器 position 指明的位置处。 |
+
+
+
+```
+删除元素
+
+1. 
+
+//指向元素 1 的迭代器
+    auto del = values.begin();
+    //迭代器右移，改为指向元素 2
+    ++del;
+    values.erase(del); //{1,3,4,5}
+2. 
+auto first = values.begin();
+    ++first;//指向元素 2
+    //指向删除区域的右边界
+    auto last = values.end();
+    --last;//指向元素 5
+    //删除 2、3 和 4
+    values.erase(first, last);
+
+3.
+values.remove('c');
+```
 
 
 
@@ -107,7 +148,26 @@ C++中struct和class的唯一区别在于默认的访问权限不同。
 
 首先需要注意的一点是，迭代器的功能是遍历容器，在遍历的同时可以访问（甚至修改）容器中的元素，但迭代器不能用来初始化空的 deque 容器。
 
+### 关联式容器
 
+
+
+| 关联式容器名称 | 特点                                                         |
+| -------------- | ------------------------------------------------------------ |
+| map            | 定义在 <map> 头文件中，使用该容器存储的数据，其各个元素的键必须是唯一的（即不能重复），该容器会根据各元素键的大小，默认进行升序排序（调用 std::less<T>）。 |
+| set            | 定义在 <set> 头文件中，使用该容器存储的数据，各个元素键和值完全相同，且各个元素的值不能重复（保证了各元素键的唯一性）。该容器会自动根据各个元素的键（其实也就是元素值）的大小进行升序排序（调用 std::less<T>）。 |
+| multimap       | 定义在 <map> 头文件中，和 map 容器唯一的不同在于，multimap 容器中存储元素的键可以重复。 |
+| multiset       | 定义在 <set> 头文件中，和 set 容器唯一的不同在于，multiset 容器中存储元素的值可以重复（一旦值重复，则意味着键也是重复的）。 |
+
+C++ 11 还新增了 4 种哈希容器，即 unordered_map、unordered_multimap 以及 unordered_set、unordered_multiset。严格来说，它们也属于关联式容器，但由于哈希容器底层采用的是哈希表，而不是红黑树，因此本教程将它们分开进行讲解（有关哈希容器，将放在后续章节做详细讲解）
+
+
+
+#### map
+
+map 容器存储的都是 pair 对象，也就是用 pair 类模板创建的键值对。其中，各个键值对的键和值可以是任意数据类型，包括 [C++](https://c.biancheng.net/cplus/) 基本数据类型（int、double 等）、使用结构体或类自定义的类型。
+
+map 容器中存储的各个键值对都选用 string 字符串作为键的类型。
 
 
 
