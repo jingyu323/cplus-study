@@ -131,5 +131,16 @@ int main()
     values12.back() = 20;
     cout << "values 新的尾元素为：" << values12.back() << endl;
 
+    //输出容器中第 3 个元素的值
+    cout << *(values12.data() + 2) << endl;
+    //修改容器中第 2 个元素的值
+    *(values12.data() + 1) = 10;
+    cout << *(values12.data() + 1) << endl;
+
+    //从下标 0 一直遍历到 size()-1 处
+    for (int i = 0; i < values12.size(); i++) {
+        cout << values12[i] << " ";
+    }
+
 
 }
