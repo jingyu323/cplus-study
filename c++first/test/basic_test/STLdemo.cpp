@@ -41,7 +41,7 @@ int main()
 
     for(ci = v1.begin(); ci!= v1.end(); ++ci)
         cout << *ci << " ";
-
+ printf("\n");
     std::array<double, 10> values {};
     for (int i = 0; i < values.size(); i++)
     {
@@ -50,6 +50,27 @@ int main()
     }
     printf("\n");
 
+
+    int h = 1;
+    auto first = values.begin();
+    auto last = values.end();
+    //初始化 values 容器为{1,2,3,4,5}
+    while (first != last)
+    {
+        *first = h;
+        ++first;
+        h++;
+    }
+
+    //  first = values.begin();
+    // while (first != last)
+    // {
+    //     cout << *first << " ";
+    //     ++first;
+    // }
+
+
+    //   printf("\n");
     if (!values.empty()) {
         for (auto val = values.begin(); val < values.end(); val++) {
             cout << *val << " ";
@@ -57,14 +78,58 @@ int main()
     }
         printf("\n");
 
+
 // 初始化
     std::array<double, 10> values2 {0.5,1.0,1.5,2.0};
         for (int i = 0; i < values2.size(); i++)
     {
         cout << values2[i] << " ";
     }
+     printf("\n");
+
+    //初始化一个空vector容量
+    vector<char>value;
+    //向value容器中的尾部依次添加 S、T、L 字符
+    value.push_back('S');
+    value.push_back('T');
+    value.push_back('L');
+    //调用 size() 成员函数容器中的元素个数
+    printf("元素个数为：%d\n", value.size());
+    //使用迭代器遍历容器
+    for (auto i = value.begin(); i < value.end(); i++) {
+        cout << *i << " ";
+    }
+    cout << endl;
+    //向容器开头插入字符
+    value.insert(value.begin(), 'C');
+    cout << "首个元素为：" << value.at(0) << endl;
+    for (auto i = value.begin(); i < value.end(); i++) {
+        cout << *i << " ";
+    }
+
+
+    vector<int>values12{1,2,3};
+    cout << "values 容器首个元素的地址：" << values12.data() << endl;
+    auto first12 = values12.begin();
+    auto end12 = values12.end();
+    //增加 values 的容量
+    values12.reserve(20);
+    cout << "values 容器首个元素的地址：" << values12.data() << endl;
+    first12 = values12.begin();
+    end12 = values12.end();
+    while (first12 != end12) {
+        cout << *first12 ;
+        ++first12;
+    }
     
-    
+    cout << "values 首元素为：" << values12.front() << endl;
+    cout << "values 尾元素为：" << values12.back() << endl;
+    //修改首元素
+    values12.front() = 10;
+    cout <<"values 新的首元素为：" << values12.front() << endl;
+    //修改尾元素
+    values12.back() = 20;
+    cout << "values 新的尾元素为：" << values12.back() << endl;
 
 
 }
