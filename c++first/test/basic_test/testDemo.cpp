@@ -429,6 +429,19 @@ printf("\n=================== vector iterator  back_insert_iterator  ===========
 
     for (itff1; itff1 != mylistff1.end(); ++itff1)
         std::cout << *itff1 << ' ';
+
+  printf("\n=================== vector iterator  forward_list  ==============\n");
+
+    list<int> mylist456;
+    //指定 2 个双向迭代器，用于执行某个区间
+    list<int>::iterator firstmylistff1 = mylist456.begin();//指向元素 0
+    list<int>::iterator lastmylistff1 = mylist456.end();//指向元素 9 之后的位置
+    //向空 list 容器中添加元素 0~9
+    for (int i = 0; i < 10; i++) {
+        mylist456.push_back(i);
+    }
+    //获取 [first,last) 范围内包含元素的个数
+    cout << "distance() = " << distance(firstmylistff1, lastmylistff1);
    
 
 }
