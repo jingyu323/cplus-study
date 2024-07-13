@@ -4,9 +4,29 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
             "type": "shell",
-            "command": "echo Hello"
+			"label": "build",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-std=c++11",
+				"-stdlib=libc++",
+				"-fdiagnostics-color=always",
+				"${file}",
+				"-o",
+				"${fileDirname}/../build/${fileBasenameNoExtension}",
+				"-g",
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault":true
+			},
+			"detail": "编译器: /usr/bin/clang++"
         }
     ]
 }

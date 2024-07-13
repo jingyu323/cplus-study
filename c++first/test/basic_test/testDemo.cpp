@@ -7,6 +7,8 @@
 #include <set>
 #include <unordered_map>
 #include <stack>
+#include <forward_list>
+#include <c++/v1/list>
 using namespace std;
 class testDemo
 {
@@ -341,7 +343,92 @@ printf("\n=================== stack  ==============\n");
     }
 
 
+printf("\n=================== deque  ==============\n");
+
+// 定义并初始化为：1 3 5 2 4
+std::deque<int> myDeque{ 1,3,5,2,4 };
+
+myDeque.push_front(11);
+myDeque.push_front(21);
+myDeque.emplace_front(13);
+ 
+// 降序排序示例。
+std::sort(myDeque.begin(), myDeque.end(), std::greater<int>());
+ 
+// 遍历容器所有元素示例。
+for (int v : myDeque)
+{
+    // 输出 5 4 3 2 1
+    std::cout << "v = " << v << std::endl;
+} 
+
+printf("\n=================== list iterator   ==============\n");
+
+std::list<int> values222{1,2,3,4,5};
+    //找到遍历的开头位置和结尾位置
+    std::list<int>::iterator begin22 = --values222.end();
+    std::list<int>::iterator end22 = --values222.begin();
+    //开始遍历
+    while (begin22 != end22)
+    {
+        cout << *begin22 << " ";
+        --begin22;
+    }
+
+printf("\n=================== vector iterator  reverse_iterator  ==============\n");
 
 
+// 创建并初始化一个 vector 容器
+    std::vector<int> myvector{ 1,2,3,4,5,6,7,8 };
+    //创建并初始化一个反向迭代器
+    std::reverse_iterator<std::vector<int>::iterator> my_reiter(myvector.rbegin());//指向 8
+    cout << *my_reiter << endl;// 8
+    cout << *(my_reiter + 3) << endl;// 5
+    cout << *(++my_reiter) << endl;// 7
+    cout << my_reiter[4] << endl;// 3
+
+
+printf("\n=================== vector iterator  back_insert_iterator  ==============\n");
+
+
+//创建一个 vector 容器
+    std::vector<int> foo;
+    //创建一个可向 foo 容器尾部添加新元素的迭代器
+    std::back_insert_iterator< std::vector<int> > back_it(foo);
+    //将 5 插入到 foo 的末尾
+    back_it = 5;
+    //将 4 插入到当前 foo 的末尾
+    back_it = 4;
+    //将 3 插入到当前 foo 的末尾
+    back_it = 3;
+    //将 6 插入到当前 foo 的末尾
+    back_it = 6;
+    //输出 foo 容器中的元素
+    for (std::vector<int>::iterator it = foo.begin(); it != foo.end(); ++it)
+        std::cout << *it << ' ';
+
+    printf("\n=================== vector iterator  front_insert_iterator  ==============\n");
+
+
+    std::forward_list<int> foof;
+    std::front_insert_iterator< std::forward_list<int> > front_itf = front_inserter(foof);
+    //向 foo 容器的头部插入元素
+    front_itf = 5;
+    front_itf = 4;
+    front_itf = 3;
+    front_itf = 6;
+    for (std::forward_list<int>::iterator it = foof.begin(); it != foof.end(); ++it)
+        std::cout << *it << ' ';
+
+        printf("\n=================== vector iterator  forward_list  ==============\n");
+
+
+    forward_list<int> mylistff1{1,2,3,4};
+    //it为前向迭代器，其指向 mylist 容器中第一个元素
+    forward_list<int>::iterator itff1 = mylistff1.begin();
+
+    for (itff1; itff1 != mylistff1.end(); ++itff1)
+        std::cout << *itff1 << ' ';
+   
 
 }
