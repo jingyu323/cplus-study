@@ -33,6 +33,16 @@ int main(int argc, char const *argv[])
         std::cout << *it << ' ';
     }
 
+
+    printf("\n=================== vector  td::less  ==============\n");
+
+    //调用第二种语法格式，利用STL标准库提供的其它比较规则（比如 greater<T>）进行排序
+    std::sort(myvector.begin(), myvector.begin() + 6, std::less<int>()); //(71 45 32 12) 26 80 53 33
+    //输出 myvector 容器中的元素
+    for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it) {
+        std::cout << *it << ' ';
+    }
+
     printf("\n=================== vector    ==============\n");
     //调用第二种语法格式，通过自定义比较规则进行排序
     std::sort(myvector.begin(), myvector.end(), mycomp2());//12 26 32 33 45 53 71 80
