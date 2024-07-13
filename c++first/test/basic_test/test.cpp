@@ -19,6 +19,8 @@ using namespace std;
 
 int main()
 {
+    
+    std::cout << __cplusplus << std::endl;
     vector<string> msg {"Hello", "C++", "World", "from", "VS Code", "and the C++ extension!"};
 
     for (const   string& word : msg)
