@@ -9,6 +9,9 @@ public:
     void setage(int age);
     void sethobby(char *hobby);
     char *gethobby();
+    People(char*, int);
+     People(){}; 
+     virtual void display();
 protected:
     char *m_name;
     int m_age;
@@ -19,6 +22,10 @@ void People::setname(char *name){ m_name = name; }
 void People::setage(int age){ m_age = age; }
 void People::sethobby(char *hobby){ m_hobby = hobby; }
 char *People::gethobby(){ return m_hobby; }
+People::People(char *name, int age): m_name(name), m_age(age){}
+void People::display(){
+    cout<<m_name<<"今年"<<m_age<<"岁了，是个无业游民。"<<endl;
+}
 
 
 class Address; 
@@ -62,10 +69,14 @@ int Student::m_total = 0;
 float Student::m_points = 0.0;
 
 //定义构造函数
-Student::Student(char *name, int age, float score){
-    m_name = name;
-    m_age = age;
-    m_score = score;
+// Student::Student(char *name, int age, float score){
+//     m_name = name;
+//     m_age = age;
+//     m_score = score;
+   
+// }
+
+Student::Student(char *name, int age, float score): People(name, age), m_score(score){ 
     m_total++;
     m_points += score;
 }
@@ -128,6 +139,18 @@ float Student::getPoints(){
     return m_points;
 }
 
+//派生类Teacher
+class Teacher: public People{
+public:
+    Teacher(char *name, int age, int salary);
+    void display();
+private:
+    int m_salary;
+};
+Teacher::Teacher(char *name, int age, int salary): People(name, age), m_salary(salary){}
+void Teacher::display(){
+    cout<<m_name<<"今年"<<m_age<<"岁了，是一名教师，每月有"<<m_salary<<"元的收入。"<<endl;
+}
 
 int main(){
 //  无参构造函数
@@ -187,6 +210,22 @@ int main(){
     pup.setranking(4);
     pup.sethobby("乒乓球");
     pup.display();
+
+ printf("\n=================== People ==============\n");
+    People *p = new People("王志刚", 23);
+    p -> display();
+    p = new Teacher("赵宏佳", 45, 8200);
+    p -> display();
+
+
+    People p1("王志刚", 23);
+    Teacher t("赵宏佳", 45, 8200);
+   
+    People &rp = p1;
+    People &rt = t;
+   
+    rp.display();
+    rt.display();
 
     return 0;
 }

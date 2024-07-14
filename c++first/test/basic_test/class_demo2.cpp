@@ -1,67 +1,101 @@
 #include<iostream>
 using namespace std;
 
-//基类People
-class People{
+//基类Base
+class Base{
 public:
-    void setname(char *name);
-    void setage(int age);
-    void sethobby(char *hobby);
-    char *gethobby();
-protected:
-    char *m_name;
-    int m_age;
-private:
-    char *m_hobby;
+    void func();
+    void func(int);
 };
-void People::setname(char *name){ m_name = name; }
-void People::setage(int age){ m_age = age; }
-void People::sethobby(char *hobby){ m_hobby = hobby; }
-char *People::gethobby(){ return m_hobby; }
+void Base::func(){ cout<<"Base::func()"<<endl; }
+void Base::func(int a){ cout<<"Base::func(int)"<<endl; }
 
-//派生类Student
-class Student: public People{
+//派生类Derived
+class Derived: public Base{
 public:
-    void setscore(float score);
-     //声明构造函数
-    Student(float score); 
-     Student(); 
-
-protected:
-    float m_score;
+    void func(char *);
+    void func(bool);
 };
-void Student::setscore(float score){ m_score = score; }
+void Derived::func(char *str){ cout<<"Derived::func(char *)"<<endl; }
+void Derived::func(bool is){ cout<<"Derived::func(bool)"<<endl; }
 
-//定义构造函数
-Student::Student(float score){
-    m_score = score; 
-}
-
-//定义构造函数
-Student::Student(){
-   
-}
-//派生类Pupil
-class Pupil: public Student{
+//间接基类A
+class A{
 public:
-    void setranking(int ranking);
+ A(int a);
+//  A();
+protected:
+    int m_a;
+};
+A::A(int a): m_a(a){ }
+// A::A( ){ }
+//直接基类B
+class B: virtual public A{  //虚继承
+public:
+    B(int a, int b);
+public:
     void display();
-private:
-    int m_ranking;
+protected:
+    int m_b;
 };
-void Pupil::setranking(int ranking){ m_ranking = ranking; }
-void Pupil::display(){
-    cout<<m_name<<"的年龄是"<<m_age<<"，考试成绩为"<<m_score<<"分，班级排名第"<<m_ranking<<"，TA喜欢"<<gethobby()<<"。"<<endl;
+B::B(int a, int b): A(a), m_b(b){ }
+void B::display(){
+    cout<<"m_a="<<m_a<<", m_b="<<m_b<<endl;
+}
+//直接基类C
+class C: virtual public A{  //虚继承
+public:
+    C(int a, int c);
+public:
+    void display();
+protected:
+    int m_c;
+};
+
+C::C(int a, int c): A(a), m_c(c){ }
+void C::display(){
+    cout<<"m_a="<<m_a<<", m_c="<<m_c<<endl;
+}
+
+//派生类D
+class D: public B, public C{
+public:
+    D(int a, int b, int c, int d);
+public:
+    void display();
+public:
+    void seta(int a){ m_a = a; }  //正确
+    void setb(int b){ m_b = b; }  //正确
+    void setc(int c){ m_c = c; }  //正确
+    void setd(int d){ m_d = d; }  //正确
+private:
+    int m_d;
+};
+
+//  在最终派生类 D 的构造函数中，除了调用 B 和 C 的构造函数，还调用了 A 的构造函数，
+// 这说明 D 不但要负责初始化直接基类 B 和 C，还要负责初始化间接基类 A。而在以往的普通继承中，派生类的构造函数只负责初始化它的直接基类，
+// 再由直接基类的构造函数初始化间接基类，用户尝试调用间接基类的构造函数将导致错误。
+D::D(int a, int b, int c, int d): A(a), B(90, b), C(100, c), m_d(d){ }
+void D::display(){
+    cout<<"m_a="<<m_a<<", m_b="<<m_b<<", m_c="<<m_c<<", m_d="<<m_d<<endl;
 }
 
 int main(){
-    Pupil pup;
-    pup.setname("小明");
-    pup.setage(15);
-    pup.setscore(92.5f);
-    pup.setranking(4);
-    pup.sethobby("乒乓球");
-    pup.display();
+    Derived d;
+    d.func("c.biancheng.net");
+    d.func(true);
+    // d.func();  //compile error
+    d.func(10);  //compile error
+    d.Base::func();
+    d.Base::func(100);
+
+    B b(10, 20);
+    b.display();
+   
+    C c(30, 40);
+    c.display();
+    D d2(50, 60, 70, 80);
+    d2.display();
 
     return 0;
 }
