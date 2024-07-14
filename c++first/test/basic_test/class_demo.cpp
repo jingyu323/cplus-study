@@ -2,10 +2,29 @@
 
 using namespace std;
 
+//基类People
+class People{
+public:
+    void setname(char *name);
+    void setage(int age);
+    void sethobby(char *hobby);
+    char *gethobby();
+protected:
+    char *m_name;
+    int m_age;
+private:
+    char *m_hobby;
+};
+void People::setname(char *name){ m_name = name; }
+void People::setage(int age){ m_age = age; }
+void People::sethobby(char *hobby){ m_hobby = hobby; }
+char *People::gethobby(){ return m_hobby; }
+
+
 class Address; 
 //类的声明
-class Student{
-private:  //私有的
+class Student : public People{
+protected:  //私有的
     char *m_name;
     int m_age;
     float m_score;
@@ -58,6 +77,24 @@ Address::Address(char *province, char *city, char *district){
     m_province = province;
     m_city = city;
     m_district = district;
+}
+
+//派生类Pupil
+class Pupil: public Student {
+public:
+    void setranking(int ranking);
+    void display();
+
+    
+  
+private:
+    int m_ranking;
+
+};
+ 
+void Pupil::setranking(int ranking){ m_ranking = ranking; }
+void Pupil::display(){
+    cout<<m_name<<"的年龄是"<<m_age<<"，考试成绩为"<<m_score<<"分，班级排名第"<<m_ranking<<"，TA喜欢"<<gethobby()<<"。"<<endl;
 }
 
 
@@ -131,6 +168,16 @@ int main(){
         cout<<"Found at index : "<< index <<endl;
     else
         cout<<"Not found"<<endl;
+
+
+
+    Pupil pup;
+    pup.setname("小明");
+    pup.setage(15);
+    pup.setscore(92.5f);
+    pup.setranking(4);
+    pup.sethobby("乒乓球");
+    pup.display();
 
     return 0;
 }
