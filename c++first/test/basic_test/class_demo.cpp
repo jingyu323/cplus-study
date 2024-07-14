@@ -40,7 +40,8 @@ public:  //共有的
     //声明构造函数
     Student(char *name, int age, float score); 
     void show(Address *addr);
-     Student(); 
+    //定义构造函数
+     Student(){}; 
 };
 
 //声明Address类
@@ -50,6 +51,7 @@ public:
 public:
     //将Student类声明为Address类的友元类
     friend class Student;
+    
 private:
     char *m_province;  //省份
     char *m_city;  //城市
@@ -69,9 +71,9 @@ Student::Student(char *name, int age, float score){
 }
 
 //定义构造函数
-Student::Student(){
+// Student::Student(){
    
-}
+// }
 
 void Student::show(Address *addr){
     cout<<m_name<<"的年龄是 "<<m_age<<"，成绩是 "<<m_score<<endl;
