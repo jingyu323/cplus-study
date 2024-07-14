@@ -100,7 +100,8 @@ int main(int argc, char const *argv[])
     for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it) {
         std::cout << *it << ' ';
     }
- printf("\n=================== is_sorted    ==============\n");
+    
+    printf("\n=================== is_sorted    ==============\n");
     //调用第一种语法格式的 is_sorted() 函数，该判断语句得不到执行
     if (is_sorted(myvector.begin(), myvector.end())) {
         std::cout << "开始对 myvector 排序" << std::endl;
