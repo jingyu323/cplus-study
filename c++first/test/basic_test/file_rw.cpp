@@ -22,10 +22,6 @@ int main() {
      
     else
         cout << "test.txt doesn't exist" << endl;
-
-
-
-
      ofstream oFile;
     oFile.open("test1.txt", ios::out);
     if (!oFile)  //条件成立，则说明文件打开出错
