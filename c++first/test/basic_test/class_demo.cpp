@@ -50,6 +50,7 @@ public:  //共有的
     //定义构造函数
      Student(){}; 
     Student(const Student &stu);  //拷贝构造函数（声明）
+    
 };
 
 //拷贝构造函数（定义）
@@ -165,6 +166,43 @@ void Teacher::display(){
     cout<<m_name<<"今年"<<m_age<<"岁了，是一名教师，每月有"<<m_salary<<"元的收入。"<<endl;
 }
 
+//变长数组类
+class Array{
+public:
+    Array(int len);
+    Array(const Array &arr);  //拷贝构造函数
+    ~Array();
+public:
+    int operator[](int i) const { return m_p[i]; }  //获取元素（读取）
+    int &operator[](int i){ return m_p[i]; }  //获取元素（写入）
+    int length() const { return m_len; }
+private:
+    int m_len;
+    int *m_p;
+};
+Array::Array(int len): m_len(len){
+    m_p = (int*)calloc( len, sizeof(int) );
+}
+// 深拷贝
+Array::Array(const Array &arr){  //拷贝构造函数
+    this->m_len = arr.m_len;
+    this->m_p = (int*)calloc( this->m_len, sizeof(int) );
+    memcpy( this->m_p, arr.m_p, m_len * sizeof(int) );
+}
+Array::~Array(){ free(m_p); }
+//打印数组元素
+void printArray(const Array &arr){
+    int len = arr.length();
+    for(int i=0; i<len; i++){
+        if(i == len-1){
+            cout<<arr[i]<<endl;
+        }else{
+            cout<<arr[i]<<", ";
+        }
+    }
+}
+
+
 int main(){
 //  无参构造函数
 // Student stu 直接创建 添加了有参构造之后
@@ -245,5 +283,18 @@ int main(){
     Student stu3(stu);  //调用拷贝构造函数
     stu2.display();
     stu3.display();
+ printf("\n=================== Array Array ==============\n");
+
+    Array arr1(10);
+    for(int i=0; i<10; i++){
+        arr1[i] = i;
+    }
+   
+    Array arr2 = arr1;
+    arr2[5] = 100;
+    arr2[3] = 29;
+   
+    printArray(arr1);
+    printArray(arr2);
     return 0;
 }
