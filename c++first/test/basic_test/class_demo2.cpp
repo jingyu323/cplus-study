@@ -6,6 +6,7 @@ class Base{
 public:
     void func();
     void func(int);
+    virtual ~ Base(){};
 };
 void Base::func(){ cout<<"Base::func()"<<endl; }
 void Base::func(int a){ cout<<"Base::func(int)"<<endl; }
@@ -102,9 +103,16 @@ int main(){
     d2.display();
 
     Base *p = new Derived();
+    Derived *q = dynamic_cast<Derived *>(p);
     p -> func();  //输出void Derived::func()
     p -> func(10);  //输出void Base::func(int)
-    p -> func("http://c.biancheng.net");  //compile error
+
+
+
+   
+       // cast A* to B*
+    q -> func("http://c.biancheng.net");  //compile error
+
 
 
     return 0;
