@@ -4,6 +4,12 @@ using namespace std;
 //基类Base
 class Base{
 public:
+    void display() {
+		cout << "BaseA::display()" << endl;
+	}
+	void display(int a) {
+		cout << "BaseA::display(a)" << endl;
+	}
     void func();
     void func(int);
     virtual ~ Base(){};
@@ -14,9 +20,14 @@ void Base::func(int a){ cout<<"Base::func(int)"<<endl; }
 //派生类Derived
 class Derived: public Base{
 public:
+//让BaseA class内名为dislay的所有东西在DerivedA中都可见(并且public)
+    using Base::display;
     void func();
     void func(char *);
     void func(bool);
+    void display() {
+		cout << "DerivedA::display()" << endl;
+	}
 };
 void Derived::func(){
     cout<<"void Derived::func()"<<endl;
@@ -93,6 +104,10 @@ int main(){
     d.func(10);  //compile error
     d.Base::func();
     d.Base::func(100);
+ printf("\n=================== sing BaseA::display  ==============\n");
+    Derived* pt2 = &d;
+	pt2->display();//DerivedA::display()
+	pt2->display(2);//正确， DerivedA类中使用using BaseA::display，避免了名称遮掩
 
     B b(10, 20);
     b.display();
