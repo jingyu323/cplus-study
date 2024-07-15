@@ -14,7 +14,7 @@ public:
      virtual void display();
 protected:
     char *m_name;
-    int m_age;
+     int m_age;
 private:
     char *m_hobby;
 };
@@ -32,8 +32,8 @@ class Address;
 //类的声明
 class Student : public People{
 protected:  //私有的
-    char *m_name;
-    int m_age;
+    // char *m_name;
+    // int m_age;
     float m_score;
     static int m_total;  //总人数
     static float m_points;  //总成绩
@@ -49,7 +49,19 @@ public:  //共有的
     void show(Address *addr);
     //定义构造函数
      Student(){}; 
+    Student(const Student &stu);  //拷贝构造函数（声明）
 };
+
+//拷贝构造函数（定义）
+Student::Student(const Student &stu){
+    this->m_name = stu.m_name;
+    this->m_age = stu.m_age;
+    this->m_score = stu.m_score;
+     
+   
+    cout<<"Copy constructor was called."<< m_age <<endl;
+}
+ 
 
 //声明Address类
 class Address{
@@ -79,6 +91,7 @@ float Student::m_points = 0.0;
 Student::Student(char *name, int age, float score): People(name, age), m_score(score){ 
     m_total++;
     m_points += score;
+     cout<<"default  constructor was called."<<endl;
 }
 
 //定义构造函数
@@ -227,5 +240,10 @@ int main(){
     rp.display();
     rt.display();
 
+ printf("\n=================== copy constract ==============\n");
+    Student stu2 = stu;  //调用拷贝构造函数
+    Student stu3(stu);  //调用拷贝构造函数
+    stu2.display();
+    stu3.display();
     return 0;
 }
