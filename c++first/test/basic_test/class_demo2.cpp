@@ -13,9 +13,13 @@ void Base::func(int a){ cout<<"Base::func(int)"<<endl; }
 //派生类Derived
 class Derived: public Base{
 public:
+    void func();
     void func(char *);
     void func(bool);
 };
+void Derived::func(){
+    cout<<"void Derived::func()"<<endl;
+}
 void Derived::func(char *str){ cout<<"Derived::func(char *)"<<endl; }
 void Derived::func(bool is){ cout<<"Derived::func(bool)"<<endl; }
 
@@ -96,6 +100,12 @@ int main(){
     c.display();
     D d2(50, 60, 70, 80);
     d2.display();
+
+    Base *p = new Derived();
+    p -> func();  //输出void Derived::func()
+    p -> func(10);  //输出void Base::func(int)
+    p -> func("http://c.biancheng.net");  //compile error
+
 
     return 0;
 }
