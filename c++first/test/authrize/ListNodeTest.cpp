@@ -27,6 +27,8 @@ public:
     ListNodeTest* getInterSectionNode(ListNodeTest* heada,ListNodeTest* headb); 
     ListNodeTest* detectSycle(ListNodeTest* heada ); 
 
+    ListNodeTest* detectSycleFastLow(ListNodeTest* heada ); 
+
 
 };
 
@@ -196,6 +198,49 @@ ListNodeTest* ListNodeTest::detectSycle(ListNodeTest* heada){
     return NULL;
 }
 
+/**
+ * 快慢指针 同一个循环遍历中一个指针执行两次移动
+ */
+ListNodeTest* ListNodeTest::detectSycleFastLow(ListNodeTest* heada){
+    
+     ListNodeTest *fast=heada;
+     ListNodeTest *slow = heada;
+      ListNodeTest *meet = NULL;
+
+    while (fast)
+    {
+         slow = slow->getNext();
+         fast = fast->getNext();
+
+         if (!fast)
+         {
+            return NULL;
+         }
+         fast = fast->getNext();
+         if (fast == slow)
+         {
+             meet =fast;
+             break;
+         }
+    }
+    if (meet == NULL)
+        {
+            return NULL;
+        }
+
+    while (heada && meet)   // 
+
+     {
+        if (heada == meet)
+        {
+            return heada; // head 和meet 相遇说明起始位置有环
+        }
+        heada = heada->getNext();
+        meet = meet->getNext();
+    }
+    return NULL;
+}
+
 int main(int argc, char const *argv[])
 {
     ListNodeTest a;
@@ -260,9 +305,6 @@ int main(int argc, char const *argv[])
 
         head5 = head5->getNext();
     }
-
-
-
     return 0;
 }
 
