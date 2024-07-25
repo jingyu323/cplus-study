@@ -182,7 +182,18 @@ ListNodeTest* ListNodeTest::getInterSectionNode(ListNodeTest* heada,ListNodeTest
 }
 
 ListNodeTest* ListNodeTest::detectSycle(ListNodeTest* heada){
+    set<ListNodeTest*> node_set;
+    while (heada)
+    {
+         if(node_set.find(heada) != node_set.end()){
+            return heada;
 
+         }
+          node_set.insert(heada);
+
+         heada = heada->getNext();
+    }
+    return NULL;
 }
 
 int main(int argc, char const *argv[])
