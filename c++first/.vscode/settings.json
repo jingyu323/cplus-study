@@ -88,5 +88,6 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "forward_list": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

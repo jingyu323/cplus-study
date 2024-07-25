@@ -10,7 +10,9 @@
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "/usr/bin/g++"
+            "compilerPath": "D:/MinGw/mingw64/bin/g++.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17"
         },
         {
             "name": "Mac",
