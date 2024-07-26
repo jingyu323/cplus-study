@@ -1,6 +1,10 @@
 #include <iostream>
 #include <queue>
 #include <stack> 
+#include <unordered_map>
+
+
+
 using namespace std; 
 class MyStack
 {
@@ -59,15 +63,49 @@ public:
   
         for (int x : vect2)
             cout << x << " -. "; 
+    }
+
+// 无重复字符最长子串
+    int lengthOfLongestSubstring(string s) 
+    {
+        int len = 0, n = s.size();
+        unordered_map<char, int> hash;
+
+        for (int left = 0, right = 0; right < n; right++)
+        {   
+            char in = s[right];
+            hash[in]++;
+
+            while (hash[in] > 1)
+            {
+                 char out = s[left++];
+                 hash[out]--;
+            }
+
+            len = max(len ,right-left+1);
         }
-        
-    
 
-    
+        return len;
+    }
+    // 最大连续1的个数
+     int findMaxConsecutiveOnes(vector<int>& nums){
+        int len = 0, n = nums.size();
+        for (int left = 0, right = 0; right < n; right++)
+        {   
+            if( nums[right]==1){
+                len = max(len,right -left+1) ;
+
+            } else{
+                left =right+1;
+            }
+
+        }
+
+        return len;
 
 
-
-    
+     }
+     
 };
 
 MyStack::MyStack(/* args */)
@@ -125,6 +163,12 @@ int main(int argc, char const *argv[])
     S1.verctorinitasarr();
     S1.verctorinitasarr3();
     S1.verctorinitasarr2();
+
+    string s = "bbb";
+
+    int len = S1.lengthOfLongestSubstring(s);
+
+     cout << len << " ";
  
 
      
