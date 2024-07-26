@@ -1,5 +1,6 @@
 #include <iostream>
 #include <set>
+#include <vector>
 using namespace std;
 class ListNodeTest
 {
@@ -28,8 +29,23 @@ public:
     ListNodeTest* detectSycle(ListNodeTest* heada ); 
 
     ListNodeTest* detectSycleFastLow(ListNodeTest* heada ); 
-
-
+    int minSubArrayLen(int target, vector<int> nums) {
+        int len = INT_MAX;
+        int n = nums.size(),sum =0;
+        for (int left = 0,right =0; right < n; right++)
+        {
+            
+            sum += nums[right];
+            while (sum >= target)
+            {
+                 len = min(len,right-left+1);
+                 sum -= nums[left++];
+            }
+            
+             
+        }
+         return len == INT_MAX ? 0: len; 
+    }
 };
 
 ListNodeTest::ListNodeTest(/* args */)
@@ -305,6 +321,12 @@ int main(int argc, char const *argv[])
 
         head5 = head5->getNext();
     }
+    // int nums[] = {2,3,1,2,4,3};
+
+    vector<int> nums = {2,3,1,2,4,3};
+     
+    int res = head2->minSubArrayLen(7, nums);
+     cout<< "res =  "<<res <<endl;
     return 0;
 }
 

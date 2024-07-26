@@ -1,6 +1,6 @@
 #include <vector>
 
-
+using namespace std;
 
 class Solution
 {
@@ -9,7 +9,7 @@ private:
 public:
     Solution(/* args */);
     ~Solution();
-    int minSubArrayLen(int target, vector<int>& nums){
+    int minSubArrayLen(int target, vector<int>* nums){
         
         return 0;
         
