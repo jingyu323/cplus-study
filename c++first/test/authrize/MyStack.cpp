@@ -105,6 +105,46 @@ public:
 
 
      }
+
+// 最小操作数
+     int minOperations(vector<int>& nums, int x) {
+         int sum = 0, n = nums.size(), len = INT_MIN;
+         for (auto e : nums)
+         {
+             sum += e;
+         }
+
+         if (sum == x)
+         {
+             return n;
+         }
+
+         int target = sum -x ;
+         if (target < 0)
+         {
+             return -1;
+         }
+         
+         int v_sum = 0;
+
+         for (int left = 0, right=0; right < n; right++)
+         {
+            v_sum += nums[right];
+
+            while (left < n && v_sum >= target)
+            {
+                 if (v_sum == target)
+                 {
+                    len = max(len,right-left+1);
+                 }
+                 v_sum -= nums[left++];
+                 
+            }
+            
+         }
+
+         return len == INT_MIN ? -1 : n - len;
+     }
      
 };
 
