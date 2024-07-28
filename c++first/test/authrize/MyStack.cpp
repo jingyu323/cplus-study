@@ -229,8 +229,57 @@ public:
 
      }
 
-     int maxSubArrayLen(vector<int> &nums, int k) {
+    int maxSubArrayLen(vector<int> &nums, int k) {
+        int sum = 0;
+        int len = nums.size();
+        int max_ans=0;
+        for (int  left = 0,right=0; right <  len; right++)
+        {
+             
+             int in  =  nums[right];
+             sum += in;
+             while (sum > k)
+             {
+                 int out = nums[left];
+                 sum -= out;
+             }
+             if(sum == k){
+                
+                len = max(len,right-left+1);
+
+             }
+             
+
+        }
+        return len;
+        
          
+    }
+    int subarraySum(vector<int>& nums, int k) {
+        int sum = 0;
+        int len = nums.size();
+        int max_ans=0;
+        int total = 0;
+
+        if(len == 1&& nums[0] != k){
+            return 0;
+        }
+
+        for (int  left = 0,right=0; right <  len; right++)
+        {
+             
+             int in  =  nums[right];
+             sum += in;
+             while (sum > k)
+             {
+                 int out = nums[left++];
+                 sum -= out;
+             }
+             if(sum == k  ){
+                max_ans++;
+             }
+        }
+        return max_ans;
     }
 };
 
