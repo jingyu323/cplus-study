@@ -192,13 +192,45 @@ public:
                 if (count == words.size()) ret.push_back(left);
 
             }
-
-           
-
-
         }
          return ret;
 
+    }
+
+     string minWindow(string s, string t){
+        if (s.size() < t.size()) return "";
+        int kind = 0;
+        int hash1[126] = {0};
+        for (auto ch : t) if (hash1[ch]++ == 0) kind++;
+        int hash2[126] = {0};
+        int len = INT_MAX, begin = -1;  
+        for (int left = 0, right = 0, count = 0; right < s.size(); right++)
+        {
+            char in = s[right];
+            hash2[in]++;
+            if (hash2[in] == hash1[in]) count++;
+
+            while (count == kind)
+            {
+                     if (right - left + 1 < len)
+                {
+                    len = right - left + 1;
+                    begin = left;
+                }
+                char out = s[left++];
+                if (hash2[out] == hash1[out]) count--;
+                hash2[out]--;
+
+            }
+            
+        }
+        if (begin == -1) return "";
+        else return s.substr(begin, len);
+
+     }
+
+     int maxSubArrayLen(vector<int> &nums, int k) {
+         
     }
 };
 
