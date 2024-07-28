@@ -105,7 +105,101 @@ public:
 
 
      }
-     
+    //   摘水果， 核心点在于 滑动窗口 控制采摘的种类， 巧妙运用 map中元素的自加加 自减减 调节map中的种类
+     int totalFruit(vector<int>& fruits){
+
+        int len =  fruits.size();
+        unordered_map<int, int> hash;
+
+        int num = 0;
+
+        for (int left = 0,right = 0; right < len; right++)
+        {
+            int  fr = fruits[right];
+            hash[fr]++;
+
+            while (hash.size() > 2)
+            {
+                 int lr = fruits[left++];
+                 hash[lr]--;
+                 if (hash[lr] == 0) hash.erase(lr);
+            }
+            
+            num = max(num ,right-left+1);
+        }
+        return num;
+     }
+     vector<int> findAnagrams(string s, string p) 
+    {
+        int count = 0;
+        vector<int> ret;
+        int hash1[26] = {0};
+        for (auto ch : p) hash1[ch-'a']++;
+
+        int hash2[26] = {0};
+        for (int left = 0, right = 0; right < s.size(); right++)
+        {
+            char in = s[right];
+            if (hash2[in-'a'] < hash1[in-'a']) count++;
+
+            hash2[in-'a']++;
+
+            if(right - left+1 > p.size()){
+                int out = s[left++];
+                if ( hash2[out -'a' ] <= hash1[out -'a' ]) 
+                {
+                   count--;
+                }
+                 hash2[out-'a']--;
+            
+            }
+            if (count == p.size())
+                ret.push_back(left);
+
+
+        }
+
+        return ret;
+    }
+    vector<int> findSubstring(string s, vector<string>& words) 
+    {
+        int len = words.size() * words[0].size();
+        unordered_map<string, int> hash1;
+        for (auto& s : words) hash1[s]++;
+        int n = s.size();
+        vector<int> ret;
+
+        for (int i = 0; i < words[0].size(); i++)
+        {
+            unordered_map<string, int> hash2;
+            int count = 0;
+            for (int left = i, right = i; right < n; right += words[0].size()){
+                string in = s.substr(right, words[0].size());
+                if(hash1.count(in) && hash2[in] <   hash1[in]  ){
+                    count++;
+                }
+                hash2[in]++;
+
+                if (right - left + 1 > len)
+                {
+                     string out = s.substr(left, words[0].size());
+                     if(hash2[out] <= hash1[out]){
+                        count--;
+                     }
+                     hash2[out]--;
+                     left += words[0].size();
+                }
+                if (count == words.size()) ret.push_back(left);
+
+            }
+
+           
+
+
+        }
+         return ret;
+
+    }
 };
 
 MyStack::MyStack(/* args */)
