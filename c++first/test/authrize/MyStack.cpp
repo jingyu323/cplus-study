@@ -321,6 +321,55 @@ public:
         }
         return max_ans;
     } 
+    int calculate(string s ){
+         stack<int> ops;
+         ops.push(1);
+         int sign = 1;
+         int  len = s.size();
+         int n =0;
+         long ret  =0 ;
+
+         while (n< len)
+         {  
+            if ( s[n] == ' ')
+            {
+                n++;
+            } 
+             else if ( s[n] == '+')
+            {
+                 sign = ops.top();
+                 n++;
+            }
+             else if ( s[n] == '-')
+            {
+                 sign = -ops.top();
+                  n++;
+            }
+            else if ( s[n] == '(')
+            {
+                ops.push(sign);
+                 n++;
+            }
+            else if ( s[n] == ')')
+            {
+                ops.pop();
+                  n++;
+            }else{
+                long sum = 0;
+              while (n < len &&    s[n] >= '0' &&  s[n] <= '9')
+              {
+                 sum = sum*10 +  s[n] - '0';
+
+                cout << "=======sum : " <<  sum*10 +  s[n] - '0'<<  endl; 
+                 n++;
+              }
+              ret += sum * sign;
+              
+            }   
+         }
+        return ret ;
+
+    }
 };
 
 MyStack::MyStack(/* args */)
@@ -380,8 +429,10 @@ int main(int argc, char const *argv[])
 
     int len = S1.lengthOfLongestSubstring(s);
 
-     cout << len << " ";
- 
+     cout << len << " "<< std::endl;;
+
+    long ret =  S1.calculate("1 + 1");
+     cout <<  "res: "<< ret  << std::endl;;
 
      
     return 0;
