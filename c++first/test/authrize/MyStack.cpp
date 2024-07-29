@@ -405,8 +405,44 @@ public:
     }
 
     int minCostClimbingStairs(vector<int>& cost) {
+        int n = cost.size();
+
+         int prev = 0, curr = 0;
+
+        for (int i=2;i<=n;i++){
+         
+            int next = min(curr + cost[i - 1],prev+cost[i - 2]);
+            prev  =curr;
+            curr = next;
+
+
+        }
+        return curr;
 
         
+
+    }
+    int rob(vector<int>& nums) {
+      int n = nums.size();
+      if( n<=1){
+        return nums[0];
+
+      }
+
+        int prev = nums[0], curr = max(nums[0],nums[1]);
+
+        for (int i=2;i<n;i++){
+            int tmp = curr;
+         
+            int curr = max(prev + nums[i ],curr);
+            prev  =tmp; 
+
+
+        }
+        return curr;
+         
+    }
+    int deleteAndEarn(vector<int>& nums) {
 
     }
 
