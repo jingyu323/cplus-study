@@ -493,6 +493,8 @@ public:
             int m =  grid.size();
             int n = grid[0].size();
 
+             if (m == 0 || n == 0) return 0;
+
             vector<vector<int>> dp (m, vector<int>(n,0));
 
              dp[0][0] = grid[0][0];
