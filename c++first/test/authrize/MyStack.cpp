@@ -443,6 +443,21 @@ public:
          
     }
     int deleteAndEarn(vector<int>& nums) {
+        vector<int> cnt(nums.size());
+
+        for (auto s : nums)
+        { 
+             cnt[s]++;
+        }
+        vector<int> dp {cnt[0], max(cnt[0], cnt[1])};
+
+         for (int i = 2; i < cnt.size(); i++) {
+            dp.push_back(max(cnt[i] * i + dp[i - 2], dp[i - 1]));
+
+         }
+
+         return dp[nums.size()-1];
+        
 
     }
 
