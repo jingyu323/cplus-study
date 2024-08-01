@@ -490,38 +490,57 @@ public:
 
         int minPathSum(vector<vector<int>>& grid) {
 
-            int m =  grid.size();
-            int n = grid[0].size();
+            int m =  obstacleGrid.size();
+            int n = obstacleGrid[0].size();
 
-             if (m == 0 || n == 0) return 0;
-
-            vector<vector<int>> dp (m, vector<int>(n,0));
-
-             dp[0][0] = grid[0][0];
-
-            for (int i = 1; i < m; ++i) {
-            dp[i][0] = grid[i][0] +dp[i-1][0];
+            vector<vector<int>> dp (m+1, vector<int>(n+1));
+ 
+        bool vhasobs = false;
+        for (int i = 0; i < m; ++i) {
+            // cout << "=======sum : " << m <<  "  n: "<< n <<  endl; 
+            if(obstacleGrid[i][0] == 0 && !vhasobs){
+                 dp[i][0] = 1;
+            }else{
+                vhasobs= true;
+                dp[i][0] = 0;
             }
-            for (int j = 1; j < n; ++j) {
-            dp[0][j] = grid[0][j] +dp[0][j-1];
-            }
-
-    
-
-            for ( int i = 1; i < m; i++)
-            {
-                
-                for (int j = 1; j < n; j++)
-                {
-                    
-                    dp[i][j] = min(dp[i - 1][j],dp[i][j - 1])  + grid[i][j] ;
-                     cout << "=======sum : " << dp[i][j] <<  endl; 
-                }
-                
-            }
-            return dp[m - 1][n - 1];
-
+           
         }
+  
+        bool hasobs = false;
+        for (int j = 0; j < n; ++j) {
+            
+           if(obstacleGrid[0][j] == 0 && !hasobs){
+            dp[0][j] = 1;
+           }else{
+                hasobs = true;
+                dp[0][j] = 0;
+                // cout << "=======sum 2: " << m <<  j <<dp[0][j] <<  endl; 
+                 
+           }
+        }
+        if(m<= 1){
+            return dp[0][n-1];
+        }
+        for ( int i = 1; i < m; i++)
+        {
+            
+            for (int j = 1; j < n; j++)
+            {
+                 if (obstacleGrid[i][j] == 0)
+                 {
+                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                 }else{
+                     dp[i][j]=0;
+                 }
+                 
+            }
+            
+        }
+         return dp[m-1 ][n-1 ];
+
+
+    }
 
 };
 
