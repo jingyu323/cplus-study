@@ -490,7 +490,38 @@ public:
 
         int minPathSum(vector<vector<int>>& grid) {
 
-            int m =  obstacleGrid.size();
+            int m =  grid.size();
+            int n = grid[0].size();
+
+             if (m == 0 || n == 0) return 0;
+
+            vector<vector<int>> dp (m, vector<int>(n,0));
+
+             dp[0][0] = grid[0][0];
+
+            for (int i = 1; i < m; ++i) {
+            dp[i][0] = grid[i][0] +dp[i-1][0];
+            }
+            for (int j = 1; j < n; ++j) {
+            dp[0][j] = grid[0][j] +dp[0][j-1];
+            }
+            for ( int i = 1; i < m; i++)
+            {
+                
+                for (int j = 1; j < n; j++)
+                {
+                    
+                    dp[i][j] = min(dp[i - 1][j],dp[i][j - 1])  + grid[i][j] ;
+                     cout << "=======sum : " << dp[i][j] <<  endl; 
+                }
+                
+            }
+            return dp[m - 1][n - 1];
+
+        }
+        int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+            
+             int m =  obstacleGrid.size();
             int n = obstacleGrid[0].size();
 
             vector<vector<int>> dp (m+1, vector<int>(n+1));
@@ -538,6 +569,31 @@ public:
             
         }
          return dp[m-1 ][n-1 ];
+    }
+
+    int minimumTotal(vector<vector<int>>& triangle) {
+
+    }
+
+
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+        sort(g.begin(),g.end());
+
+        sort(s.begin(),s.end());
+
+        int child = 0;
+        int cookie = 0;
+
+        while (child < g.size() && cookie < s.size())
+        {
+                if(g[child] <= s[cookie]){
+                    child ++;
+                   
+                }
+                 cookie ++;
+        }
+        return child;
+        
 
 
     }
