@@ -598,6 +598,8 @@ public:
 
     }
 
+    //  计算最大接水的最大面积
+
     int maxArea(vector<int>& height) {
                  int max_ar =0 ;
             int r = height.size()-1,l=0;
