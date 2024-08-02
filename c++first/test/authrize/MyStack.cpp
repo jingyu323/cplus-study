@@ -104,7 +104,47 @@ public:
         return len;
 
 
-     }
+     } 
+
+// 最小操作数
+     int minOperations(vector<int>& nums, int x) {
+         int sum = 0, n = nums.size(), len = INT_MIN;
+         for (auto e : nums)
+         {
+             sum += e;
+         }
+
+         if (sum == x)
+         {
+             return n;
+         }
+
+         int target = sum -x ;
+         if (target < 0)
+         {
+             return -1;
+         }
+         
+         int v_sum = 0;
+
+         for (int left = 0, right=0; right < n; right++)
+         {
+            v_sum += nums[right];
+
+            while (left < n && v_sum >= target)
+            {
+                 if (v_sum == target)
+                 {
+                    len = max(len,right-left+1);
+                 }
+                 v_sum -= nums[left++];
+                 
+            }
+            
+         }
+
+         return len == INT_MIN ? -1 : n - len;
+     } 
     //   摘水果， 核心点在于 滑动窗口 控制采摘的种类， 巧妙运用 map中元素的自加加 自减减 调节map中的种类
      int totalFruit(vector<int>& fruits){
 
@@ -280,7 +320,307 @@ public:
              }
         }
         return max_ans;
+    } 
+    int calculate(string s ){
+         stack<int> ops;
+         ops.push(1);
+         int sign = 1;
+         int  len = s.size();
+         int n =0;
+         long ret  =0 ;
+
+         while (n< len)
+         {  
+            if ( s[n] == ' ')
+            {
+                n++;
+            } 
+             else if ( s[n] == '+')
+            {
+                 sign = ops.top();
+                 n++;
+            }
+             else if ( s[n] == '-')
+            {
+                 sign = -ops.top();
+                  n++;
+            }
+            else if ( s[n] == '(')
+            {
+                ops.push(sign);
+                 n++;
+            }
+            else if ( s[n] == ')')
+            {
+                ops.pop();
+                  n++;
+            }else{
+                long sum = 0;
+              while (n < len &&    s[n] >= '0' &&  s[n] <= '9')
+              {
+                 sum = sum*10 +  s[n] - '0';
+
+                cout << "=======sum : " <<  sum*10 +  s[n] - '0'<<  endl; 
+                 n++;
+              }
+              ret += sum * sign;
+              
+            }   
+         }
+        return ret ;
+
     }
+     int fib(int n) {
+         if(n<=1){
+            return n;
+        }
+
+        vector<int> dp(n + 1);
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (int i=2;i<=n;i++){
+            dp[i] = dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+
+    }
+    int tribonacci(int n) {
+
+         if (n == 0) {
+            return 0;
+        }
+        if (n <= 2) {
+            return 1;
+        }
+        int p = 0, q = 0, r = 1, s = 1;
+        for (int i = 3; i <= n; ++i) {
+            p = q;
+            q = r;
+            r = s;
+            s = p + q + r;
+        }
+        return s;  
+
+    }
+
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n = cost.size();
+
+         int prev = 0, curr = 0;
+
+        for (int i=2;i<=n;i++){
+         
+            int next = min(curr + cost[i - 1],prev+cost[i - 2]);
+            prev  =curr;
+            curr = next;
+
+
+        }
+        return curr;
+
+        
+
+    }
+    int rob(vector<int>& nums) {
+      int n = nums.size();
+      if( n<=1){
+        return nums[0];
+
+      }
+
+        int prev = nums[0], curr = max(nums[0],nums[1]);
+
+        for (int i=2;i<n;i++){
+            int tmp = curr;
+         
+            int curr = max(prev + nums[i ],curr);
+            prev  =tmp; 
+
+
+        }
+        return curr;
+         
+    }
+    int deleteAndEarn(vector<int>& nums) {
+        vector<int> cnt(nums.size());
+
+        for (auto s : nums)
+        { 
+             cnt[s]++;
+        }
+        vector<int> dp {cnt[0], max(cnt[0], cnt[1])};
+
+         for (int i = 2; i < cnt.size(); i++) {
+            dp.push_back(max(cnt[i] * i + dp[i - 2], dp[i - 1]));
+
+         }
+
+         return dp[nums.size()-1];
+        
+
+    }
+
+    int uniquePaths(int m, int n) {
+        // int dp[m][n]={0};
+
+        vector<vector<int>> dp (m, vector<int>(n));
+
+
+        for (int i = 0; i < m; ++i) {
+            dp[i][0] = 1;
+        }
+        for (int j = 0; j < n; ++j) {
+           dp[0][j] = 1;
+        }
+ 
+
+        for ( int i = 1; i < m; i++)
+        {
+            
+            for (int j = 1; j < n; j++)
+            {
+                  
+                 dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+            
+        }
+         return dp[m - 1][n - 1];
+    }
+
+        int minPathSum(vector<vector<int>>& grid) {
+
+            int m =  grid.size();
+            int n = grid[0].size();
+
+             if (m == 0 || n == 0) return 0;
+
+            vector<vector<int>> dp (m, vector<int>(n,0));
+
+             dp[0][0] = grid[0][0];
+
+            for (int i = 1; i < m; ++i) {
+            dp[i][0] = grid[i][0] +dp[i-1][0];
+            }
+            for (int j = 1; j < n; ++j) {
+            dp[0][j] = grid[0][j] +dp[0][j-1];
+            }
+            for ( int i = 1; i < m; i++)
+            {
+                
+                for (int j = 1; j < n; j++)
+                {
+                    
+                    dp[i][j] = min(dp[i - 1][j],dp[i][j - 1])  + grid[i][j] ;
+                     cout << "=======sum : " << dp[i][j] <<  endl; 
+                }
+                
+            }
+            return dp[m - 1][n - 1];
+
+        }
+        int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+            
+             int m =  obstacleGrid.size();
+            int n = obstacleGrid[0].size();
+
+            vector<vector<int>> dp (m+1, vector<int>(n+1));
+ 
+        bool vhasobs = false;
+        for (int i = 0; i < m; ++i) {
+            // cout << "=======sum : " << m <<  "  n: "<< n <<  endl; 
+            if(obstacleGrid[i][0] == 0 && !vhasobs){
+                 dp[i][0] = 1;
+            }else{
+                vhasobs= true;
+                dp[i][0] = 0;
+            }
+           
+        }
+  
+        bool hasobs = false;
+        for (int j = 0; j < n; ++j) {
+            
+           if(obstacleGrid[0][j] == 0 && !hasobs){
+            dp[0][j] = 1;
+           }else{
+                hasobs = true;
+                dp[0][j] = 0;
+                // cout << "=======sum 2: " << m <<  j <<dp[0][j] <<  endl; 
+                 
+           }
+        }
+        if(m<= 1){
+            return dp[0][n-1];
+        }
+        for ( int i = 1; i < m; i++)
+        {
+            
+            for (int j = 1; j < n; j++)
+            {
+                 if (obstacleGrid[i][j] == 0)
+                 {
+                     dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                 }else{
+                     dp[i][j]=0;
+                 }
+                 
+            }
+            
+        }
+         return dp[m-1 ][n-1 ];
+    }
+
+    int minimumTotal(vector<vector<int>>& triangle) {
+
+    }
+
+
+    int findContentChildren(vector<int>& g, vector<int>& s) {
+         sort(g.begin(),g.end());
+
+        sort(s.begin(),s.end());
+
+        int child = 0;
+        int cookie = 0;
+
+        while (child < g.size() && cookie < s.size())
+        {
+                if(g[child] <= s[cookie]){
+                    child ++;
+                   
+                }
+                 cookie ++;
+        }
+        return child;
+        
+
+
+    }
+
+    //  计算最大接水的最大面积
+
+    int maxArea(vector<int>& height) {
+                 int max_ar =0 ;
+            int r = height.size()-1,l=0;
+            while(l<r){
+                int area = min(height[l],height[r])*(r-l);
+                max_ar = max(max_ar,area);
+                if(height[l]<= height[r]){
+                    l++;
+
+                }else{
+                    r--;
+                }
+
+            }
+            
+        return max_ar;
+
+        
+
+    }
+
 };
 
 MyStack::MyStack(/* args */)
@@ -321,9 +661,6 @@ int main(int argc, char const *argv[])
         int a = S1.pop();
          cout << a  << endl;
      }
-
-
-
     vector<int> vect;
     
     vect.push_back(10);
@@ -343,8 +680,10 @@ int main(int argc, char const *argv[])
 
     int len = S1.lengthOfLongestSubstring(s);
 
-     cout << len << " ";
- 
+     cout << len << " "<< std::endl;;
+
+    long ret =  S1.calculate("1 + 1");
+     cout <<  "res: "<< ret  << std::endl;;
 
      
     return 0;
