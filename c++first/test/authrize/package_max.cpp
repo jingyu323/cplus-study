@@ -193,6 +193,34 @@ string reverseVowels(string s) {
 
     }
 }
+struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+  };
+
+    bool hasCycle(ListNode *head) {
+
+        ListNode* cur;
+        ListNode*  nextnode;
+
+
+        while (head->next != NULL)
+        {
+            cur->next = head->next;
+            nextnode->next=cur->next;
+            if (cur == nextnode)
+            {
+                return true;
+            }
+            
+
+        }
+        
+    return false;
+
+        
+    }
 
 
 
