@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unordered_map>
+#include <vector>
+#include <iostream>
 
  
 
@@ -77,6 +79,96 @@ int knapsack(int w[], int v[], int n, int C)
     // 返回背包中物品的总价值，即为最优解
     return s;
 }
+
+vector<int> twoSum(vector<int>& numbers, int target) {
+        
+        int start=0,end= numbers.size()-1;
+          vector<int> res(2);
+
+        while (start < end)
+        {
+                int sum=numbers[start]+numbers[end];
+                if(sum == target){
+                    res[0]=start+1;
+                    res[1]=end+1;
+                    break;
+                }else{
+
+                    if (sum>target)
+                    {
+                        end--;
+                         
+                    }else{
+                        start++;
+                    }
+                    
+                }
+
+             
+        }
+
+        return res;
+        
+
+
+}
+
+string reverseVowels(string s) {
+    unordered_map<char,int> yu={{'a',1},{'o',1},{'e',1},{'i',1},{'u',1},{'A',1},{'O',1},{'E',1},{'I',1},{'U',1}};
+    int start = 0,end =s.size()-1;
+    while (start< end)
+    {
+         char chs = s[start];
+         char che = s[end];
+
+         if (yu[chs] ==1 && yu[che] ==1)
+         {
+            s[start] = che;
+            s[end] = chs;
+            start++;
+            end--;
+         }else if (yu[chs] !=1)
+         {
+             start++;
+         }else if (yu[che] !=1) {
+            end--;
+         }
+         
+         
+
+    }
+
+    return s;
+    
+
+
+
+}
+ 
+    bool checkPalindrome(const string& s, int low, int high) {
+            for (int i = low, j = high; i < j; ++i, --j) {
+                if (s[i] != s[j]) {
+                    return false;
+                }
+            }
+            return true;
+        } 
+        bool validPalindrome(string s) {
+            int dele = 0;
+            int start = 0,end =s.size()-1;
+            while (start< end)
+            {
+                if(s[start] == s[end]){
+                    start++;
+                    end--;
+                }else{
+                    return checkPalindrome(s,start,end-1) ||  checkPalindrome(s,start+1,end) ;
+                    
+                }
+            }
+
+        return true;
+        }
  
 // 主函数
 int main()
@@ -95,10 +187,9 @@ int main()
     printf("The maximum value of the knapsack is %d\n", result);
     // 返回0，表示程序正常结束
 
-    unordered_map<string, int> hash1;
+    string s = "aguokepatgbnvfqmgmlcupuufxoohdfpgjdmysgvhmvffcnqxjjxqncffvmhvgsymdjgpfdhooxfuupuculmgmqfvnbgtapekouga";
 
-     int a =1;
-     int b=2;
+    validPalindrome(s);
 
 
     return 0;
