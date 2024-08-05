@@ -31,6 +31,28 @@ public:
 
     }
 
+    int rob(vector<int>& nums) {
+        int n = nums.size();
+      if( n<=1){
+        return nums[0];
+      }
+      return  max(robhome(nums,0,n-2),robhome(nums,1,n-1));
+    }
+     
+     int robhome(vector<int>& nums,int  start ,int end){
+        int pre2 = 0, pre1 = 0;
+        for (size_t i = start; i <= end; i++)
+        {
+             int cur =  max(pre1, pre2 + nums[i]);
+             pre2 = pre1;
+             pre1 = cur;
+        }
+        return pre1;
+        
+
+     }
+
+
 };
 
 dongtaiguihua::dongtaiguihua(/* args */)
