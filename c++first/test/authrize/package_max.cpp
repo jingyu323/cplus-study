@@ -201,28 +201,32 @@ struct ListNode {
 
     bool hasCycle(ListNode *head) {
 
-        ListNode* cur;
-        ListNode*  nextnode;
-
-
-        while (head->next != NULL)
+        if (head==NULL)
         {
-            cur->next = head->next;
-            nextnode->next=cur->next;
-            if (cur == nextnode)
-            {
-                return true;
-            }
-            
-
+             return false;
         }
+        
+
+        ListNode* cur= head ;
+        ListNode*  nextnode=head->next;
+
+
+       while (cur != NULL && nextnode  != NULL && nextnode->next != NULL) {
+        if (cur == nextnode) {
+            return true;
+        }
+        cur = cur->next;
+        nextnode = nextnode->next->next;
+    }
         
     return false;
 
         
     }
 
+string findLongestWord(string s, vector<string>& dictionary) {
 
+    }
 
 // 主函数
 int main()
