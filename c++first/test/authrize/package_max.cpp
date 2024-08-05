@@ -224,7 +224,43 @@ struct ListNode {
         
     }
 
-string findLongestWord(string s, vector<string>& dictionary) {
+    bool isSub(string s,string  target ){
+        int sl = s.size();
+        int tl = target.size();
+
+        int i=0,j=0;
+
+        while ( i< sl && j < tl)
+        {
+             if(s[i] == target[j]){
+                j++;
+             }
+             i++;
+        }
+
+        return j == tl;
+    }
+
+    // 524. Longest Word in Dictionary through Deleting (Medium)
+    // Leetcode / 力扣
+    string findLongestWord(string s, vector<string>& dictionary) {
+        string  maxlongword= "";
+        for (size_t i = 0; i < dictionary.size(); i++)
+        {
+             int mlength = maxlongword.size();
+             int l2 = dictionary[i].size();
+
+             if(mlength  > l2 || ( mlength == l2 && maxlongword <dictionary[i] )){
+                continue;
+             }
+             if(isSub(s,dictionary[i])){
+                maxlongword = dictionary[i];
+
+             }
+
+        }
+        return maxlongword;
+        
 
     }
 
