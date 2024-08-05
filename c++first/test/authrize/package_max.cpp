@@ -218,10 +218,7 @@ struct ListNode {
         cur = cur->next;
         nextnode = nextnode->next->next;
     }
-        
     return false;
-
-        
     }
 
     bool isSub(string s,string  target ){
@@ -260,8 +257,6 @@ struct ListNode {
 
         }
         return maxlongword;
-        
-
     }
 
 // 主函数
