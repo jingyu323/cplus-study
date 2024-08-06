@@ -52,6 +52,52 @@ public:
 
      }
 
+ 
+
+int minPathSum(vector<vector<int>>& grid) {
+
+                if (grid.size() == 0 || grid[0].size() == 0) {
+                return 0;
+            }
+            int m = grid.size(), n = grid[0].size();
+            vector<int> dp ;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    if (j == 0) {
+                        dp[j] = dp[j];        // 只能从上侧走到该位置
+                    } else if (i == 0) {
+                        dp[j] = dp[j - 1];    // 只能从左侧走到该位置
+                    } else {
+                        dp[j] = min(dp[j - 1], dp[j]);
+                    }
+                    dp[j] += grid[i][j];
+                }
+            }
+            return dp[n - 1];
+            
+        }
+
+  int uniquePaths(int m, int n) {
+        // int dp[m][n]={0};
+
+       
+        vector<int> dp(n+1,1);
+
+     
+
+        for ( int i = 1; i < m; i++)
+        {
+            
+            for (int j = 1; j < n; j++)
+            {
+                  
+                 dp[j] = dp[j] + dp[j - 1];
+            }
+            
+        }
+         return dp [n - 1];
+    }
+
 
 };
 
