@@ -98,6 +98,32 @@ int minPathSum(vector<vector<int>>& grid) {
          return dp [n - 1];
     }
 
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        if(nums.size() ==0){
+            return 0;
+        }
+        int n = nums.size();
+        vector<int> dp(n+1);
+
+        for (int i = 2; i < n; i++)
+        {   // 递增子序列
+             if (nums[i] - nums[i-1] ==nums[i-1] - nums[i-2] )
+             {
+                dp[i] = dp[i-1]+1;
+             }
+             
+        }
+        int total=0;
+        for (int i = 0; i < dp.size(); i++)
+        {
+             total += dp[i];
+        }
+        return total;
+        
+        
+
+    }
+
 
 };
 
