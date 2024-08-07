@@ -1,5 +1,6 @@
 #include <vector>
 #include <unordered_map>
+#include <iostream>
 using namespace std;
 
 class dongtaiguihua
@@ -155,7 +156,8 @@ dongtaiguihua::~dongtaiguihua()
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    cout << "sd"<< endl;
+
     return 0;
 }
 
