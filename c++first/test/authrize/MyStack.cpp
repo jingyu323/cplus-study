@@ -2,7 +2,7 @@
 #include <queue>
 #include <stack> 
 #include <unordered_map>
-
+#include <algorithm>
 
 
 using namespace std; 
@@ -577,7 +577,7 @@ public:
 
 
     int findContentChildren(vector<int>& g, vector<int>& s) {
-         sort(g.begin(),g.end());
+        sort(g.begin(),g.end());
 
         sort(s.begin(),s.end());
 
